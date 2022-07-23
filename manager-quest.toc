@@ -1,0 +1,17 @@
+\contentsline {section}{\numberline {1}introduction}{1}{section.1}%
+\contentsline {section}{\numberline {2}Basic idea}{1}{section.2}%
+\contentsline {section}{\numberline {3}"Races"}{1}{section.3}%
+\contentsline {section}{\numberline {4}Classes}{1}{section.4}%
+\contentsline {section}{\numberline {5}Stats}{2}{section.5}%
+\contentsline {subsection}{\numberline {5.1}List of stats to consider:}{2}{subsection.5.1}%
+\contentsline {section}{\numberline {6}Code}{2}{section.6}%
+\contentsline {section}{\numberline {7}Globals}{3}{section.7}%
+\contentsline {section}{\numberline {8}Ressource handler}{3}{section.8}%
+\contentsline {section}{\numberline {9}Sprite class}{3}{section.9}%
+\contentsline {section}{\numberline {10}Window handler}{4}{section.10}%
+\contentsline {section}{\numberline {11}View}{4}{section.11}%
+\contentsline {section}{\numberline {12}Map}{5}{section.12}%
+\contentsline {section}{\numberline {13}Drawing}{6}{section.13}%
+\contentsline {section}{\numberline {14}Game Loop function}{7}{section.14}%
+\contentsline {section}{\numberline {15}Player}{7}{section.15}%
+\contentsline {section}{\numberline {16}Main}{7}{section.16}%

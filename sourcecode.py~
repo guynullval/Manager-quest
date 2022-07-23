@@ -1,0 +1,212 @@
+from __future__ import annotations
+from abc import ABC, abstractmethod
+import pygame
+import pprint
+from pygame.locals import *
+import numpy
+
+CELLSIZE = 32
+FONTFILE = "terminal8x8_gs_ro.png"
+
+class FileLoader():
+    _fontimage : pygame.Surface
+    def __init__(self, filename : str):
+        self._fontimage = pygame.image.load("terminal8x8_gs_ro.png")
+        self._fontimage.set_colorkey((0,0,0))
+
+    def GetTileSet(self):
+        pass
+
+class TileSheet:
+    _tiles = [pygame.Surface]
+    def __init__(self,
+                 file : pygame.Surface,
+                 width : int,
+                 height : int,
+                 rows : int,
+                 columns : int):
+        for x in range(rows):
+            for y in range(columns):
+                self._tiles.append(
+                    pygame.transform.scale(
+                        file.subsurface(y * width, x * height, width, height),
+                        (CELLSIZE, CELLSIZE)
+                    )
+                )
+
+class Window():
+    _size = (int, int)
+    _surface = pygame.Surface
+    def __init__(self, width, height) -> None:
+        self._surface = pygame.display.set_mode((width, height), 0, 32)
+
+        
+    def surface(self) -> pygame.Surface:
+        return self._surface
+
+class View:
+    _camera : pygame.Rect
+    _trackingObject = None
+    def __init__(self,
+                 topx : int,
+                 topy : int,
+                 cameraWidth : int,
+                 cameraHeight : int,
+                 trackingObject = None):
+        self._camera = pygame.Rect(topx, topy, topx+cameraWidth, topycameraHeight)
+        if trackingObject is not None:
+            self._trackingObject = trackingObject
+
+    def slice(self, surface : pygame.Surface):
+        return surface.Subsurface(self._camera)
+
+    def trackObject(self, surface : pygame.Surface):
+        pass
+
+    def checkCenterObject(self):
+        pass
+
+    def move(self):
+        if self._trackingObject is not None:
+            while(self._camera.centerx > self._trackingObject.x):
+                self._camera.centerx -= 1
+            while(self._camera.centerx < self._trackingObject.x):
+                self._camera.centerx += 1
+            while(self._camera.centery > self._trackingObject.y):
+                self._camera.centery -= 1
+            while(self._camera.centery < self._trackingObject.y):
+                self._camera.centery += 1
+
+    def update(self) -> pygame.Surface:
+        pass
+
+def drawMap(map : str,
+            pos : [(int, int)],
+            tiles : [pygame.Surface],
+            destination :pygame.Surface):
+    _drawingList : [(pygame.Surface,(int,int))] = []
+    x = 0
+    y = 0
+    for ind, c in enumerate(map):
+        _drawingList.append((tiles[ord(c)+1], pos[ind]))
+    destination.blits(_drawingList)
+
+def drawing(chars : str,
+            pos : [(int, int)],
+            tiles : [pygame.Surface],
+            destination :pygame.Surface):
+    _drawingList : [(pygame.Surface,(int,int))] = []
+    x = 0
+    y = 0
+    for ind, c in enumerate(chars):
+        _drawingList.append((tiles[ord(c)+1], pos[ind]))
+    destination.blits(_drawingList)
+
+class Map:
+    _str : str
+    _pos : [(int,int)] = []
+    _map : pygame.Surface
+    def __init__(self, tiles):
+        # TEMP map
+        self._str = ""
+        tempMap = [ "################################",
+                    "#       #             #        #",
+                    "#       #             #        #",
+                    "#       #             #        #",
+                    "#       #             #        #",
+                    "#                              #",
+                    "#                              #",
+                    "#           y                  #",
+                    "#      Hello                   #",
+                    "#       p                      #",
+                    "#                              #",
+                    "#                              #",
+                    "#                              #",
+                    "#                              #",
+                    "#                              #",
+                    "################################"
+        ]
+        w = len(tempMap[0]) * CELLSIZE
+        h = len(tempMap) * CELLSIZE
+        self._map = pygame.Surface((w, h))
+        
+        for i, s in enumerate(tempMap):
+            self._str = self._str + s
+            for string_i, _ in enumerate(s):
+                self._pos.append((string_i*CELLSIZE, i*CELLSIZE))
+        drawMap(self._str, self._pos, tiles, self._map)
+
+    def map(self):
+        return self._map
+
+def GameLoop(window, map, player, tiles):
+    out = True
+    enteties = []
+    while(out):
+        movVec = (0,0)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                out = False
+            elif event.type == pygame.KEYDOWN:
+                movVec = getInput(event)
+        if player.arrived():
+            player._next_x += movVec[0] * CELLSIZE
+            player._next_y += movVec[1] * CELLSIZE
+        move(player)
+        window.surface().blit(map.map(), (0,0))
+        drawing(player._c, [(player._x, player._y)], tiles._tiles, window.surface())
+        pygame.display.flip()
+    pprint.pprint(str(player._x) + ", " + str(player._y) + ", " + str(player._next_x) + ", " + str(player._next_y))
+    #pprint.pprint(map._pos)
+        # Run game
+
+class Player:
+    _next_x : int
+    _x : int
+    _next_y : int
+    _y : int
+    _c : chr
+    def __init__(self, x : int, y : int, char : chr):
+        self._x = x
+        self._y = y
+        self._next_x = x
+        self._next_y = y
+        self._c = char
+    def arrived(self) -> bool:
+        if self._x == self._next_x or self._y == self._next_y:
+            return True
+        return False
+
+def getInput(ev):
+    inputList = { pygame.K_UP : (0,-1),
+                  pygame.K_DOWN : (0,1),
+                  pygame.K_LEFT : (-1, 0),
+                  pygame.K_RIGHT : (1, 0),
+    }
+    return inputList.get(ev.key, (0,0))
+
+def move(player):
+    if player._next_x > player._x:
+        player._x += 1
+    elif player._next_x < player._x:
+        player._x -= 1
+    elif player._next_y > player._y:
+        player._y += 1
+    elif player._next_y < player._y:
+        player._y -= 1
+
+def main():
+    pygame.init()
+    pygame.font.init()
+    # -------
+    _files = FileLoader("terminal8x8_gs_ro.png")
+    _tiles = TileSheet(_files._fontimage, 8, 8, 16, 16)
+    window = Window(800, 600)
+    map = Map(_tiles._tiles)
+    player = Player(32, 32, "@")
+    GameLoop(window, map, player, _tiles)
+    # -------
+    pygame.quit()
+
+if __name__=="__main__":
+    main()

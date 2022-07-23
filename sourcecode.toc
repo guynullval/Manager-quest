@@ -1,0 +1,20 @@
+\contentsline {section}{\numberline {1}introduction}{2}{section.1}%
+\contentsline {section}{\numberline {2}Basic idea}{2}{section.2}%
+\contentsline {section}{\numberline {3}"Races"}{2}{section.3}%
+\contentsline {section}{\numberline {4}Classes}{2}{section.4}%
+\contentsline {section}{\numberline {5}Stats}{3}{section.5}%
+\contentsline {subsection}{\numberline {5.1}List of stats to consider:}{3}{subsection.5.1}%
+\contentsline {section}{\numberline {6}Code}{3}{section.6}%
+\contentsline {section}{\numberline {7}Globals}{4}{section.7}%
+\contentsline {section}{\numberline {8}Cell function}{4}{section.8}%
+\contentsline {section}{\numberline {9}Ressource handler}{4}{section.9}%
+\contentsline {section}{\numberline {10}Sprite class}{5}{section.10}%
+\contentsline {section}{\numberline {11}Window handler}{5}{section.11}%
+\contentsline {section}{\numberline {12}View MIGHT BE REMOVED}{5}{section.12}%
+\contentsline {section}{\numberline {13}Drawing}{6}{section.13}%
+\contentsline {section}{\numberline {14}Map}{7}{section.14}%
+\contentsline {section}{\numberline {15}Game Loop function}{8}{section.15}%
+\contentsline {section}{\numberline {16}Player}{9}{section.16}%
+\contentsline {section}{\numberline {17}Input player movement}{9}{section.17}%
+\contentsline {section}{\numberline {18}Move}{10}{section.18}%
+\contentsline {section}{\numberline {19}Main}{10}{section.19}%

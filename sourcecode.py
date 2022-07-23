@@ -1,61 +1,3 @@
-# -*- org-src-preserve-indentation: t -*-
-#+Title:
-#+Date:
-#+Author:
-
-
-* introduction
-
-* Basic idea
-
-A dungeon crawler set in a modern day office space (with cubicles, cantinas etc.) instead of fighting I need another way of handling engagement.
-
-* "Races"
-
-- Zzzombie - the constantly sleepy coworker, never seems to be quite awake nor have they had a good nights sleep in their life.
-- Gobbo - The coworker who handles mails, you're not sure if they've ever had a shower, but the greasy strands of hair makes you think not.
-- Creeps - 
-- Emotional vampire
-- Ghost
-- Troglodytes
-
-
-* Classes
-
-- Financial
-- IT
-- Assistant
-- Intern
-- Secretary
-- Janitor
-- Boss
-
-* Stats
-
-Stats in an RPG is like... something... really... hmm (ed: come back with a zinger here). Usually the stats in a traditional roguelike might be something akin to - Constitution, Strength, Wisdom, Intelligence etc. basically if you've seen a rulebook for a TTRPG you can probably recognize most of these AND THEY WORK! that's why people use them, they really REALLY work. I'm not choosing differently because I think I can do better, but because, well since the game is already set in a modern office environment, there's little reason to not have some weird quirk with the stats again.
-
-** List of stats to consider:
-- Neuroticism: how panicked and alert a player is about their surrounding.
-- Openness: how open they can allow themself to be.
-- Reasoning: how good they are at logically deducting things, (maybe reasoning and neuroticism can kindda benefit and be a detriment at the same time)
-- Madness: How mad the character is (remember! you don't have to be mad to work here, but it helps!) 
-- Agreeableness: How much other characters like you.
-- Laziness: How much (or little :/ ) energy a character has.
-
-
-I Really REALLY wanted to put "Agility" into this stat list, but not agility as it is traditionally used, but more as in the agile method that is usually claimed by every company under the sun that has too much money and not enough sensible managers/CEOs. Though I feel like that'll be an unnescessary dig at alot of people I have tremendous respect for. (though maybe they don't care what a nobody on the internet does or say... I dunno :) )
-
-So that's the N.O.R.M.A.L. stat system (you'd think I'd have picked these words carefully... and you'd be right) patent pending yadda yadda.
-
-* Code
-
-How neat would it be if we could quit here? alas now we have to try and code this :S 
-
-
-
-
-#+Name: import
-#+begin_src python :tangle "sourcecode.py"
 from __future__ import annotations
 from abc import ABC, abstractmethod
 import pygame
@@ -66,31 +8,10 @@ from collections.abc import Callable
 from functools import reduce, cache
 import json
 from dataclasses import dataclass, field
-#+end_src
 
-* Globals
-
-Global variables are frowned upon by virtually everyone and their mom, which is fair, I don't like them either, but I don't have a better idea.
-
-Global variables are the following
-- cell size, i.e. how large the cell that fills the screen surface should be. Then I can later just divide the screenwidth or screenheight of the drawing destination surface by the cell size to know how big the are is. (so I don't draw outside the screen/surface), this is also where I'm placing the filenames for fonts which I might need/want to change. 
-  
-
-#+Name: GLOBALS
-#+begin_src python :noweb yes :tangle "sourcecode.py"
 CELLSIZE = 32
 FONTFILE = "terminal8x8_gs_ro.png"
-#+end_src
 
-* Cell function
-
-The cell function handles converting the direction vectors into coordinates that can 
-
-
-* Ressource handler
-
-#+Name: Ressources
-#+begin_src python :noweb yes :tangle "sourcecode.py"
 class FileLoader():
     _fontimage : pygame.Surface
     def __init__(self, filename : str):
@@ -99,12 +20,7 @@ class FileLoader():
 
     def GetTileSet(self):
         pass
-#+end_src
 
-* Sprite class
-
-#+Name: TileSheet
-#+begin_src python :noweb yes :tangle "sourcecode.py"
 class TileSheet:
     _tiles = [pygame.Surface]
     def __init__(self,
@@ -121,16 +37,7 @@ class TileSheet:
                         (CELLSIZE, CELLSIZE)
                     )
                 )
-#+end_src
 
-
-* Window handler
-
-The window class is where the initializing is going to happen, as well as where the pygame window.
-
-
-#+Name: Window
-#+begin_src python :noweb yes :tangle "sourcecode.py"
 class Window():
     _size = (int, int)
     _surface = pygame.Surface
@@ -140,16 +47,7 @@ class Window():
         
     def surface(self) -> pygame.Surface:
         return self._surface
-#+end_src
 
-* View MIGHT BE REMOVED
-
-The view holds a surface and a pygame.Rect. The rect is moved around to "slice" a subsurface from the map. 
-
-
-
-#+Name: SurfaceCam
-#+begin_src python :noweb yes :tangle "sourcecode.py"
 class View:
     _camera : pygame.Rect
     _trackingObject = None
@@ -174,16 +72,7 @@ class View:
 
     def update(self) -> pygame.Surface:
         pass
-#+end_src
 
-
-
-* Drawing
-
-Drawmap function is only called to draw the surface of the static map.
-
-#+Name: DrawMap
-#+begin_src python :noweb yes :tangle "sourcecode.py"
 def drawMap(map : str,
             pos : [(int, int)],
             tiles : [pygame.Surface],
@@ -194,12 +83,7 @@ def drawMap(map : str,
     for ind, c in enumerate(map):
         _drawingList.append((tiles[ord(c)+1], pos[ind]))
     destination.blits(_drawingList)
-#+end_src
 
-The drawing function takes one or more characters and draws them to the screen.
-
-#+Name: Drawing
-#+begin_src python :noweb yes :tangle "sourcecode.py"
 def drawing(chars : str,
             pos : [(int, int)],
             tiles : [pygame.Surface],
@@ -210,17 +94,7 @@ def drawing(chars : str,
     for ind, c in enumerate(chars):
         _drawingList.append((tiles[ord(c)+1], pos[ind]))
     destination.blits(_drawingList)
-#+end_src
 
-
-* Map
-
-the map is for now just a container class for a premade "dungeon", this is to test whether or not the drawing function can handle the sheer drawing calls. AND that it can handle the various characters.
-
-It's supposed to just have a giant, static (more or less static) image of the map.
-
-#+Name: MapClass
-#+begin_src python :noweb yes :tangle "sourcecode.py"
 class Map:
     _str : str
     _pos : [(int,int)] = []
@@ -257,28 +131,10 @@ class Map:
 
     def map(self):
         return self._map
-#+end_src
 
-* Actor list
-
-The actor list is where a list of actors are being created.
-
-#+Name: ActorList
-#+begin_src python :noweb yes :tangle "sourcecode.py"
-def makeActors(amount : int, playerIndex : int) -> [Player]:
-    pass
-#+end_src
-
-
-* Game Loop function
-
-The Game loop is where the structure of the game is at.
-
-#+Name: GameLoopfunction 
-#+begin_src python :noweb yes :tangle "sourcecode.py"
 def GameLoop(window, _map, tiles):
     running = True
-    player = Actor('@',(32,32), (32,32))
+    player = Player('@',(32,32), (32,32))
     currVec = player.currxy()
     nxtVec = player.nxtxy()
     log = []
@@ -294,25 +150,24 @@ def GameLoop(window, _map, tiles):
         if player.arrived():
             nxtVec = tuple(map(lambda n, _n: n + ( _n * CELLSIZE), nxtVec, movVec))           
         currVec = move(player.currxy(), nxtVec)
-        player = Actor( '@',currVec, nxtVec)
+        player = Player( '@',currVec, nxtVec)
         window.surface().blit(_map.map(), (0,0))
         drawing(player._char(), [player.currxy()], tiles._tiles, window.surface())
         pygame.display.flip()
         log.append("current vector : " + str(currVec) + "nxtVector : " + str(nxtVec) + "has player arrived: " + str(player.arrived()))
         cl.tick_busy_loop(60)
-#+end_src
 
-* Player
+    #pprint.pprint(log)
+    #pprint.pprint(map._pos)
+        # Run game
 
-The player class is, for now just a place holder, keeping the player char (literally a char value), position and that's it. It contains a check method, and two properties.
-
-#+Name: Playerclass
-#+begin_src python :noweb yes :tangle "sourcecode.py"
 @dataclass(frozen=True)
-class Actor:
+class Player:
     _c : chr = field(init=True)
     xy : (int, int) = field(init=True)
     _xy : (int, int) = field(init=True)
+
+
     def arrived(self) -> bool:
         return self.xy == self._xy
 
@@ -324,14 +179,7 @@ class Actor:
 
     def _char(self):
         return self._c
-#+end_src
 
-* Input player movement
-
-for now I just handle the input through a simple function that checks whether or not a valid key has been pressed.
-
-#+Name: Input
-#+begin_src python :noweb yes :tangle "sourcecode.py"
 def getInput(ev):
     inputList = { pygame.K_UP : (0,-1),
                   pygame.K_DOWN : (0,1),
@@ -339,15 +187,7 @@ def getInput(ev):
                   pygame.K_RIGHT : (1, 0),
     }
     return inputList.get(ev.key, (0,0))
-#+end_src
 
-
-* Move
-
-Move function is just meant to take tqwo positional arguments, the current position and the destination, and return a new tuple with the new current position. I believe It *could* theoretically maybe, potentially handle diagonal movement - ish but this is just you grandmas 4 directional moves.
-
-#+Name: Move
-#+begin_src python :nowrap yes :tangle "sourcecode.py"
 def move(xy : (int, int), _xy : (int, int)) -> (int, int):
     acc = []
     for n, _n in zip(xy, _xy):
@@ -358,15 +198,6 @@ def move(xy : (int, int), _xy : (int, int)) -> (int, int):
         acc.append(n)
     return tuple(acc)
 
-#+end_src
-
-
-* Main
-
-In the main function I initialize the different components, like the window, the gameloop function, etc.
-
-#+Name: Mainfunction
-#+begin_src python :tangle "sourcecode.py" 
 def main():
     pygame.init()
     pygame.font.init()
@@ -378,12 +209,6 @@ def main():
     GameLoop(window, map, _tiles)
     # -------
     pygame.quit()
-#+end_src
 
-
-
-#+Name: Main
-#+begin_src python :tangle "sourcecode.py"
 if __name__=="__main__":
     main()
-#+end_src

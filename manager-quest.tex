@@ -1,0 +1,327 @@
+% Created 2022-07-20 Wed 21:56
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\date{}
+\title{}
+\hypersetup{
+ pdfauthor={},
+ pdftitle={},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 26.3 (Org mode 9.5.4)}, 
+ pdflang={English}}
+\begin{document}
+
+\tableofcontents
+
+
+
+\section{introduction}
+\label{sec:org52764bf}
+
+\section{Basic idea}
+\label{sec:org908cb6d}
+
+A dungeon crawler set in a modern day office space (with cubicles, cantinas etc.) instead of fighting I need another way of handling engagement.
+
+\section{"Races"}
+\label{sec:org8400df9}
+
+\begin{itemize}
+\item Zzzombie - the constantly sleepy coworker, never seems to be quite awake nor have they had a good nights sleep in their life.
+\item Gobbo - The coworker who handles mails, you're not sure if they've ever had a shower, but the greasy strands of hair makes you think not.
+\item Creeps -
+\item Emotional vampire
+\item Ghost
+\item Troglodytes
+\end{itemize}
+
+
+\section{Classes}
+\label{sec:org1b47f8c}
+
+\begin{itemize}
+\item Financial
+\item IT
+\item Assistant
+\item Intern
+\item Secretary
+\item Janitor
+\item Boss
+\end{itemize}
+
+\section{Stats}
+\label{sec:orgf91c2a6}
+
+Stats in an RPG is like\ldots{} something\ldots{} really\ldots{} hmm (ed: come back with a zinger here). Usually the stats in a traditional roguelike might be something akin to - Constitution, Strength, Wisdom, Intelligence etc. basically if you've seen a rulebook for a TTRPG you can probably recognize most of these AND THEY WORK! that's why people use them, they really REALLY work. I'm not choosing differently because I think I can do better, but because, well since the game is already set in a modern office environment, there's little reason to not have some weird quirk with the stats again.
+
+\subsection{List of stats to consider:}
+\label{sec:org3c9a95d}
+\begin{itemize}
+\item Neuroticism: how panicked and alert a player is about their surrounding.
+\item Openness: how open they can allow themself to be.
+\item Reasoning: how good they are at logically deducting things, (maybe reasoning and neuroticism can kindda benefit and be a detriment at the same time)
+\item Madness: How mad the character is (remember! you don't have to be mad to work here, but it helps!)
+\item Agreeableness: How much other characters like you.
+\item Laziness: How much (or little :/ ) energy a character has.
+\end{itemize}
+
+
+I Really REALLY wanted to put "Agility" into this stat list, but not agility as it is traditionally used, but more as in the agile method that is usually claimed by every company under the sun that has too much money and not enough sensible managers/CEOs. Though I feel like that'll be an unnescessary dig at alot of people I have tremendous respect for. (though maybe they don't care what a nobody on the internet does or say\ldots{} I dunno :) )
+
+So that's the N.O.R.M.A.L. stat system (you'd think I'd have picked these words carefully\ldots{} and you'd be right) patent pending yadda yadda.
+
+\section{Code}
+\label{sec:org7aee7b6}
+
+How neat would it be if we could quit here? alas now we have to try and code this :S 
+
+
+
+
+\begin{verbatim}
+from __future__ import annotations
+from abc import ABC, abstractmethod
+import pygame
+import pprint
+from pygame.locals import *
+import numpy
+\end{verbatim}
+
+\section{Globals}
+\label{sec:orgfcf5f73}
+
+Global variables are frowned upon by virtually everyone and their mom, which is fair, I don't like them either, but I don't have a better idea.
+
+Global variables are the following
+\begin{itemize}
+\item cell size, i.e. how large the cell that fills the screen surface should be. Then I can later just divide the screenwidth or screenheight of the drawing destination surface by the cell size to know how big the are is. (so I don't draw outside the screen/surface), this is also where I'm placing the filenames for fonts which I might need/want to change.
+\end{itemize}
+
+
+\begin{verbatim}
+CELLSIZE = 32
+FONTFILE = "terminal8x8_gs_ro.png"
+\end{verbatim}
+
+\section{Ressource handler}
+\label{sec:org2c00a0c}
+
+\begin{verbatim}
+class FileLoader():
+    _fontimage : pygame.Surface
+    def __init__(self, filename : str):
+        self._fontimage = pygame.image.load("terminal8x8_gs_ro.png")
+        self._fontimage.set_colorkey((0,0,0))
+
+    def GetTileSet(self):
+        pass
+\end{verbatim}
+
+\section{Sprite class}
+\label{sec:org27b1f7b}
+
+\begin{verbatim}
+class TileSheet:
+    _tiles = [pygame.Surface]
+    def __init__(self,
+                 file : pygame.Surface,
+                 width : int,
+                 height : int,
+                 rows : int,
+                 columns : int):
+        for x in range(rows):
+            for y in range(columns):
+                self._tiles.append(
+                    pygame.transform.scale(
+                        file.subsurface(y * width, x * height, width, height),
+                        (CELLSIZE, CELLSIZE)
+                    )
+                )
+\end{verbatim}
+
+
+\section{Window handler}
+\label{sec:org6f2d68c}
+
+The window class is where the initializing is going to happen, as well as where the pygame window.
+
+
+\begin{verbatim}
+class Window():
+    _size = (int, int)
+    _surface = pygame.Surface
+    def __init__(self, width, height) -> None:
+        self._surface = pygame.display.set_mode((width, height), 0, 32)
+
+        
+    def surface(self) -> pygame.Surface:
+        return self._surface
+\end{verbatim}
+
+\section{View}
+\label{sec:orgdfc5f32}
+
+The view holds a surface and a pygame.Rect. The rect is moved around to "slice" a subsurface from the map. 
+
+\begin{verbatim}
+class View:
+    _camera : pygame.Rect
+    _trackingObject = None
+    def __init__(self,
+                 topx : int,
+                 topy : int,
+                 cameraWidth : int,
+                 cameraHeight : int,
+                 trackingObject = None):
+        self._camera = pygame.Rect(topx, topy, topx+cameraWidth, topycameraHeight)
+        if trackingObject is not None:
+            self._trackingObject = trackingObject
+
+    def slice(self, surface : pygame.Surface):
+        return surface.Subsurface(self._camera)
+
+    def trackObject(self, surface : pygame.Surface):
+        pass
+
+    def checkCenterObject(self):
+        pass
+
+    def move(self):
+        if self._trackingObject is not None:
+            while(self._camera.centerx > self._trackingObject.x):
+                self._camera.centerx -= 1
+            while(self._camera.centerx < self._trackingObject.x):
+                self._camera.centerx += 1
+            while(self._camera.centery > self._trackingObject.y):
+                self._camera.centery -= 1
+            while(self._camera.centery < self._trackingObject.y):
+                self._camera.centery += 1
+
+    def update(self) -> pygame.Surface:
+        pass
+\end{verbatim}
+
+
+\section{Map}
+\label{sec:orgc048359}
+
+the map is for now just a container class for a premade "dungeon", this is to test whether or not the drawing function can handle the sheer drawing calls. AND that it can handle the various 
+
+\begin{verbatim}
+class Map:
+    _str : str
+    _pos : [(int,int)] = []
+    _map : pygame.Surface
+    def __init__(self):
+        # TEMP map
+        self._str = ""
+        tempMap = [ "################################",
+                    "#       #             #        #",
+                    "#       #             #        #",
+                    "#       #             #        #",
+                    "#       #             #        #",
+                    "#                              #",
+                    "#                              #",
+                    "#    @      y                  #",
+                    "#                              #",
+                    "#       p                      #",
+                    "#                              #",
+                    "#                              #",
+                    "#                              #",
+                    "#                              #",
+                    "#                              #",
+                    "################################"
+        ]
+        self._map = pygame.Surface(len(tempMap)*CELLSIZE,
+                                   len(tempMap[0] * CELLSIZE))
+        
+        for i, s in enumerate(tempMap):
+            self._str = self._str + s
+            for string_i, _ in enumerate(s):
+                self._pos.append((string_i*CELLSIZE, i*CELLSIZE))
+        draw = Drawing()
+\end{verbatim}
+
+
+
+\section{Drawing}
+\label{sec:org3893620}
+
+\begin{verbatim}
+class Drawing:
+    _drawingList : [(pygame.Surface,(int,int))] = []
+    def drawMap(self,
+                map,
+                tiles : [pygame.Surface],
+                destination :pygame.Surface):
+        x = 0
+        y = 0
+        for ind, c in enumerate(map._str):
+            self._drawingList.append((tiles[ord(c)+1], map._pos[ind]))
+        destination.blits(self._drawingList)
+            
+\end{verbatim}
+
+\section{Game Loop function}
+\label{sec:org1405179}
+
+The Game loop is where the structure of the game is at.
+
+\begin{verbatim}
+def GameLoop(window, map):
+    drawer = Drawing()
+    n = True
+    _files = FileLoader("terminal8x8_gs_ro.png")
+    _tiles = TileSheet(_files._fontimage, 8, 8, 16, 16)
+    while(n):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                n = False
+        drawer.drawMap(map, _tiles._tiles, window.surface())
+        pygame.display.flip()
+    #pprint.pprint(map._pos)
+        # Run game
+\end{verbatim}
+
+\section{Player}
+\label{sec:orgb17c10d}
+
+The player class is, for now just a place holder, keeping the player char (literally a char value), position and that's it.
+
+
+\section{Main}
+\label{sec:orgd25be79}
+
+In the main function I initialize the different components, like the window, the gameloop function.
+
+\begin{verbatim}
+def main():
+    pygame.init()
+    pygame.font.init()
+    # -------
+    window = Window(800, 600)
+    map = Map()
+    GameLoop(window, map)
+    # -------
+    pygame.quit()
+\end{verbatim}
+
+
+
+\begin{verbatim}
+if __name__=="__main__":
+    main()
+\end{verbatim}
+\end{document}

@@ -1,0 +1,20 @@
+\BOOKMARK [1][-]{section.1}{introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Basic idea}{}% 2
+\BOOKMARK [1][-]{section.3}{"Races"}{}% 3
+\BOOKMARK [1][-]{section.4}{Classes}{}% 4
+\BOOKMARK [1][-]{section.5}{Stats}{}% 5
+\BOOKMARK [2][-]{subsection.5.1}{List of stats to consider:}{section.5}% 6
+\BOOKMARK [1][-]{section.6}{Code}{}% 7
+\BOOKMARK [1][-]{section.7}{Globals}{}% 8
+\BOOKMARK [1][-]{section.8}{Cell function}{}% 9
+\BOOKMARK [1][-]{section.9}{Ressource handler}{}% 10
+\BOOKMARK [1][-]{section.10}{Sprite class}{}% 11
+\BOOKMARK [1][-]{section.11}{Window handler}{}% 12
+\BOOKMARK [1][-]{section.12}{View MIGHT BE REMOVED}{}% 13
+\BOOKMARK [1][-]{section.13}{Drawing}{}% 14
+\BOOKMARK [1][-]{section.14}{Map}{}% 15
+\BOOKMARK [1][-]{section.15}{Game Loop function}{}% 16
+\BOOKMARK [1][-]{section.16}{Player}{}% 17
+\BOOKMARK [1][-]{section.17}{Input player movement}{}% 18
+\BOOKMARK [1][-]{section.18}{Move}{}% 19
+\BOOKMARK [1][-]{section.19}{Main}{}% 20

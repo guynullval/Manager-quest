@@ -1,0 +1,17 @@
+\BOOKMARK [1][-]{section.1}{introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Basic idea}{}% 2
+\BOOKMARK [1][-]{section.3}{"Races"}{}% 3
+\BOOKMARK [1][-]{section.4}{Classes}{}% 4
+\BOOKMARK [1][-]{section.5}{Stats}{}% 5
+\BOOKMARK [2][-]{subsection.5.1}{List of stats to consider:}{section.5}% 6
+\BOOKMARK [1][-]{section.6}{Code}{}% 7
+\BOOKMARK [1][-]{section.7}{Globals}{}% 8
+\BOOKMARK [1][-]{section.8}{Ressource handler}{}% 9
+\BOOKMARK [1][-]{section.9}{Sprite class}{}% 10
+\BOOKMARK [1][-]{section.10}{Window handler}{}% 11
+\BOOKMARK [1][-]{section.11}{View}{}% 12
+\BOOKMARK [1][-]{section.12}{Map}{}% 13
+\BOOKMARK [1][-]{section.13}{Drawing}{}% 14
+\BOOKMARK [1][-]{section.14}{Game Loop function}{}% 15
+\BOOKMARK [1][-]{section.15}{Player}{}% 16
+\BOOKMARK [1][-]{section.16}{Main}{}% 17
