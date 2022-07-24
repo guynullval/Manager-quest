@@ -84,22 +84,45 @@ FONTFILE = "terminal8x8_gs_ro.png"
 
 * Cell function
 
-The cell function handles converting the direction vectors into coordinates that can 
+The cell function handles converting the direction vectors into coordinates that can be used on the screen
 
+#+Name: Cell
+#+begin_src python :nowrap yes :tangle "sourcecode.py"
+def Cell(cell : (int, int)) -> (int, int):
+    return tuple(map(lambda n : n * CELLSIZE, cell))
+#+end_src
 
 * Ressource handler
 
-#+Name: Ressources
-#+begin_src python :noweb yes :tangle "sourcecode.py"
-class FileLoader():
-    _fontimage : pygame.Surface
-    def __init__(self, filename : str):
-        self._fontimage = pygame.image.load("terminal8x8_gs_ro.png")
-        self._fontimage.set_colorkey((0,0,0))
+the ressources are being loaded into a file class that holds the different informastion that is needed for the game to function, like resolution, tileset to use and so forth.
 
-    def GetTileSet(self):
-        pass
+#+Name: File load
+#+begin_src python :nowrap yes :tangle "sourcecode.py"
+def loadFiles() -> ConfigFile:
+    _fontImage = pygame.image.load("terminal8x8_gs_ro.png")
+    _fontImage.set_colorkey((0,0,0))
+    with open('conf.json', 'r') as _file:
+        config = json.load(_file)
+    return ConfigFile(_fontImage, config)
 #+end_src
+
+** File class
+
+The file class is an immutable data container that holds the information needed for the game to function
+
+#+Name: File
+#+begin_src python :nowrap yes :tangle "sourcecode.py"
+@dataclass(frozen=True)
+class ConfigFile:
+    _image : pygame.Surface
+    _conf : dict
+    def image(self) -> pygame.Surface:
+        return self._image
+    def config(self) -> dict:
+        return self._conf
+#+end_src
+
+
 
 * Sprite class
 
@@ -302,11 +325,11 @@ def GameLoop(window, _map, tiles):
         cl.tick_busy_loop(60)
 #+end_src
 
-* Player
+* Actor
 
 The player class is, for now just a place holder, keeping the player char (literally a char value), position and that's it. It contains a check method, and two properties.
 
-#+Name: Playerclass
+#+Name: Actorclass
 #+begin_src python :noweb yes :tangle "sourcecode.py"
 @dataclass(frozen=True)
 class Actor:
@@ -326,7 +349,11 @@ class Actor:
         return self._c
 #+end_src
 
-* Input player movement
+* Player relevant functions
+
+These functions return relevant values for a player class
+
+** Input player movement
 
 for now I just handle the input through a simple function that checks whether or not a valid key has been pressed.
 
@@ -341,6 +368,32 @@ def getInput(ev):
     return inputList.get(ev.key, (0,0))
 #+end_src
 
+* Collide
+
+The collide function gets two position tuples and checks if they are the same, if they are it returns true if not it returns false
+
+#+Name: Collision
+#+begin_src python :noweb yes :tangle "sourcecode.py"
+def collision(xy, _xy):
+    return xy == _xy
+#+end_src
+
+* Update Actors
+
+The update actor function is going to map onto the list of actors in the game.
+
+#+Name: updateActor
+#+begin_src python :noweb yes :tangle "sourcecode.py"
+def updateActor(lstOfActors : [Actor]) -> [Actor]:
+    # retLst = []
+    # #check collision
+    # lstCollision
+    # for nxt in lstOfActors:
+    #     lstCollision.append(nxt.
+    # for actor in lstOfActors:
+    #     currVec = move(actor.currxy(), actor.nxtxy())
+    pass
+#+end_src
 
 * Move
 
@@ -371,8 +424,8 @@ def main():
     pygame.init()
     pygame.font.init()
     # -------
-    _files = FileLoader("terminal8x8_gs_ro.png")
-    _tiles = TileSheet(_files._fontimage, 8, 8, 16, 16)
+    _files = loadFiles()
+    _tiles = TileSheet(_files.image(), 8, 8, 16, 16)
     window = Window(800, 600)
     map = Map(_tiles._tiles)
     GameLoop(window, map, _tiles)

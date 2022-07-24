@@ -4,18 +4,32 @@ import pygame
 import pprint
 from pygame.locals import *
 import numpy
+from collections.abc import Callable
+from functools import reduce, cache
+import json
+from dataclasses import dataclass, field
 
 CELLSIZE = 32
 FONTFILE = "terminal8x8_gs_ro.png"
 
-class FileLoader():
-    _fontimage : pygame.Surface
-    def __init__(self, filename : str):
-        self._fontimage = pygame.image.load("terminal8x8_gs_ro.png")
-        self._fontimage.set_colorkey((0,0,0))
+def Cell(cell : (int, int)) -> (int, int):
+    return tuple(map(lambda n : n * CELLSIZE, cell))
 
-    def GetTileSet(self):
-        pass
+def loadFiles() -> ConfigFile:
+    _fontImage = pygame.image.load("terminal8x8_gs_ro.png")
+    _fontImage.set_colorkey((0,0,0))
+    with open('conf.json', 'r') as _file:
+        config = json.load(_file)
+    return ConfigFile(_fontImage, config)
+
+@dataclass(frozen=True)
+class ConfigFile:
+    _image : pygame.Surface
+    _conf : dict
+    def image(self) -> pygame.Surface:
+        return self._image
+    def config(self) -> dict:
+        return self._conf
 
 class TileSheet:
     _tiles = [pygame.Surface]
@@ -65,17 +79,6 @@ class View:
 
     def checkCenterObject(self):
         pass
-
-    def move(self):
-        if self._trackingObject is not None:
-            while(self._camera.centerx > self._trackingObject.x):
-                self._camera.centerx -= 1
-            while(self._camera.centerx < self._trackingObject.x):
-                self._camera.centerx += 1
-            while(self._camera.centery > self._trackingObject.y):
-                self._camera.centery -= 1
-            while(self._camera.centery < self._trackingObject.y):
-                self._camera.centery += 1
 
     def update(self) -> pygame.Surface:
         pass
@@ -139,43 +142,50 @@ class Map:
     def map(self):
         return self._map
 
-def GameLoop(window, map, player, tiles):
-    out = True
-    enteties = []
-    while(out):
+def makeActors(amount : int, playerIndex : int) -> [Player]:
+    pass
+
+def GameLoop(window, _map, tiles):
+    running = True
+    player = Actor('@',(32,32), (32,32))
+    currVec = player.currxy()
+    nxtVec = player.nxtxy()
+    log = []
+    cl = pygame.time.Clock()
+    while(running):
         movVec = (0,0)
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                out = False
-            elif event.type == pygame.KEYDOWN:
-                movVec = getInput(event)
+            match event.type:
+                case pygame.QUIT:
+                    running = False
+                case pygame.KEYDOWN:
+                    movVec = getInput(event)
         if player.arrived():
-            player._next_x += movVec[0] * CELLSIZE
-            player._next_y += movVec[1] * CELLSIZE
-        move(player)
-        window.surface().blit(map.map(), (0,0))
-        drawing(player._c, [(player._x, player._y)], tiles._tiles, window.surface())
+            nxtVec = tuple(map(lambda n, _n: n + ( _n * CELLSIZE), nxtVec, movVec))           
+        currVec = move(player.currxy(), nxtVec)
+        player = Actor( '@',currVec, nxtVec)
+        window.surface().blit(_map.map(), (0,0))
+        drawing(player._char(), [player.currxy()], tiles._tiles, window.surface())
         pygame.display.flip()
-    pprint.pprint(str(player._x) + ", " + str(player._y) + ", " + str(player._next_x) + ", " + str(player._next_y))
-    #pprint.pprint(map._pos)
-        # Run game
+        log.append("current vector : " + str(currVec) + "nxtVector : " + str(nxtVec) + "has player arrived: " + str(player.arrived()))
+        cl.tick_busy_loop(60)
 
-class Player:
-    _next_x : int
-    _x : int
-    _next_y : int
-    _y : int
-    _c : chr
-    def __init__(self, x : int, y : int, char : chr):
-        self._x = x
-        self._y = y
-        self._next_x = x
-        self._next_y = y
-        self._c = char
+@dataclass(frozen=True)
+class Actor:
+    _c : chr = field(init=True)
+    xy : (int, int) = field(init=True)
+    _xy : (int, int) = field(init=True)
     def arrived(self) -> bool:
-        if self._x == self._next_x or self._y == self._next_y:
-            return True
-        return False
+        return self.xy == self._xy
+
+    def currxy(self):
+        return self.xy
+
+    def nxtxy(self):
+        return self._xy
+
+    def _char(self):
+        return self._c
 
 def getInput(ev):
     inputList = { pygame.K_UP : (0,-1),
@@ -185,26 +195,38 @@ def getInput(ev):
     }
     return inputList.get(ev.key, (0,0))
 
-def move(player):
-    if player._next_x > player._x:
-        player._x += 1
-    elif player._next_x < player._x:
-        player._x -= 1
-    elif player._next_y > player._y:
-        player._y += 1
-    elif player._next_y < player._y:
-        player._y -= 1
+def collision(xy, _xy):
+    return xy == _xy
+
+def updateActor(lstOfActors : [Actor]) -> [Actor]:
+    # retLst = []
+    # #check collision
+    # lstCollision
+    # for nxt in lstOfActors:
+    #     lstCollision.append(nxt.
+    # for actor in lstOfActors:
+    #     currVec = move(actor.currxy(), actor.nxtxy())
+    pass
+
+def move(xy : (int, int), _xy : (int, int)) -> (int, int):
+    acc = []
+    for n, _n in zip(xy, _xy):
+        if n > _n:
+            n = n - 2
+        elif n < _n:
+            n = n + 2
+        acc.append(n)
+    return tuple(acc)
 
 def main():
     pygame.init()
     pygame.font.init()
     # -------
-    _files = FileLoader("terminal8x8_gs_ro.png")
-    _tiles = TileSheet(_files._fontimage, 8, 8, 16, 16)
+    _files = loadFiles()
+    _tiles = TileSheet(_files.image(), 8, 8, 16, 16)
     window = Window(800, 600)
     map = Map(_tiles._tiles)
-    player = Player(32, 32, "@")
-    GameLoop(window, map, player, _tiles)
+    GameLoop(window, map, _tiles)
     # -------
     pygame.quit()
 

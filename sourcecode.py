@@ -7,7 +7,7 @@ import numpy
 from collections.abc import Callable
 from functools import reduce, cache
 import json
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 CELLSIZE = 32
 FONTFILE = "terminal8x8_gs_ro.png"
@@ -132,15 +132,13 @@ class Map:
     def map(self):
         return self._map
 
-def GameLoop(window, _map, tiles):
+def GameLoop(window, map, tiles):
     running = True
-    player = Player('@',(32,32), (32,32))
-    currVec = player.currxy()
-    nxtVec = player.nxtxy()
-    log = []
-    cl = pygame.time.Clock()
-    while(running):
-        movVec = (0,0)
+    player = Player((32,32), (32,32), '@')
+    movVec = (0,0)
+    currVec = player.xy()
+    nxtVec = player._xy()
+    while(out):
         for event in pygame.event.get():
             match event.type:
                 case pygame.QUIT:
@@ -149,32 +147,28 @@ def GameLoop(window, _map, tiles):
                     movVec = getInput(event)
         if player.arrived():
             nxtVec = tuple(map(lambda n, _n: n + ( _n * CELLSIZE), nxtVec, movVec))           
-        currVec = move(player.currxy(), nxtVec)
-        player = Player( '@',currVec, nxtVec)
-        window.surface().blit(_map.map(), (0,0))
-        drawing(player._char(), [player.currxy()], tiles._tiles, window.surface())
+        currVec = move(player.xy(), nxtVec)
+        player = Player(currVec, nxtVec, '@')
+        window.surface().blit(map.map(), (0,0))
+        drawing(player._char(), [player.xy()], tiles._tiles, window.surface())
         pygame.display.flip()
-        log.append("current vector : " + str(currVec) + "nxtVector : " + str(nxtVec) + "has player arrived: " + str(player.arrived()))
-        cl.tick_busy_loop(60)
-
-    #pprint.pprint(log)
+    pprint.pprint(str(player.xy()) + ", " + str(player._xy()))
     #pprint.pprint(map._pos)
         # Run game
 
 @dataclass(frozen=True)
 class Player:
-    _c : chr = field(init=True)
-    xy : (int, int) = field(init=True)
-    _xy : (int, int) = field(init=True)
-
+    xy : (int, int)
+    _xy : (int, int)
+    _c : chr
 
     def arrived(self) -> bool:
-        return self.xy == self._xy
+        return self.xy() == self._xy()
 
-    def currxy(self):
+    def xy(self):
         return self.xy
 
-    def nxtxy(self):
+    def _xy(self):
         return self._xy
 
     def _char(self):
@@ -192,11 +186,11 @@ def move(xy : (int, int), _xy : (int, int)) -> (int, int):
     acc = []
     for n, _n in zip(xy, _xy):
         if n > _n:
-            n = n - 2
+            n = n - 1
         elif n < _n:
-            n = n + 2
+            n = n + 1
         acc.append(n)
-    return tuple(acc)
+    return tuple(lst)
 
 def main():
     pygame.init()
