@@ -63,9 +63,10 @@ import pprint
 from pygame.locals import *
 import numpy
 from collections.abc import Callable
-from functools import reduce, cache
+from functools import reduce, cache, wraps, partial
 import json
 from dataclasses import dataclass, field
+import operator
 #+end_src
 
 * Globals
@@ -82,7 +83,12 @@ CELLSIZE = 32
 FONTFILE = "terminal8x8_gs_ro.png"
 #+end_src
 
-* Cell function
+
+* Positional handling
+
+Positional functions all tackles different aspect of onscreen positioning. Things lige moving, checking collisions. multiplying a vector tuple so that it uses the correct 
+
+** Cell function
 
 The cell function handles converting the direction vectors into coordinates that can be used on the screen
 
@@ -92,9 +98,76 @@ def Cell(cell : (int, int)) -> (int, int):
     return tuple(map(lambda n : n * CELLSIZE, cell))
 #+end_src
 
-* Ressource handler
 
-the ressources are being loaded into a file class that holds the different informastion that is needed for the game to function, like resolution, tileset to use and so forth.
+** Collision
+
+The collision function gets two position tuples and checks if they are the same, if they are it returns true if not it returns false
+
+#+Name: Collision
+#+begin_src python :noweb yes :tangle "sourcecode.py"
+def collision(xy, _xy):
+    return xy == _xy
+#+end_src
+
+
+** Move
+
+Move function is just meant to take tqwo positional arguments, the current position and the destination, and return a new tuple with the new current position. I believe It *could* theoretically maybe, potentially handle diagonal movement - ish but this is just you grandmas 4 directional moves.
+
+#+Name: Move
+#+begin_src python :nowrap yes :tangle "sourcecode.py"
+def move(xy : (int,int), _xy : (int, int)) -> (int, int):
+    acc = []
+    for n, _n in zip(xy, _xy):
+        if n > _n:
+            n = n - 2
+        elif n < _n:
+            n = n + 2
+        acc.append(n)
+    return tuple(acc)
+
+#+end_src
+
+
+** Vector data struct
+
+#+Name: Vector
+#+begin_src python :nowrap yes :tangle "sourcecode.py"
+@dataclass(frozen=True)
+class Vector:
+    x : int
+    y : int
+    def __add__(self, other):
+        return Vector(self.x + other.x, self.y + other.y)
+    def __sub__(self, other):
+        return Vector(self.x - other.x, self.y - other.y)
+#+end_src
+
+
+* Input
+
+** Input player movement
+
+for now I just handle the input through a simple function that checks whether or not a valid key has been pressed. if not it returns a (0,0) vector. 
+
+#+Name: Input
+#+begin_src python :noweb yes :tangle "sourcecode.py"
+def getInput(ev):
+    inputList = { pygame.K_UP : (0,-1),
+                  pygame.K_DOWN : (0,1),
+                  pygame.K_LEFT : (-1, 0),
+                  pygame.K_RIGHT : (1, 0),
+    }
+    return inputList.get(ev.key, (0,0))
+#+end_src
+
+
+
+
+
+** Ressource handler
+
+Another euqually import (or more important input) is the different ressources. For now it is only a config json file and a tilesheet, I'm interested in, but it could expand to more tilesheets, or even premade levels (or templates). The ressources are being loaded into a file class that holds the different information.
 
 #+Name: File load
 #+begin_src python :nowrap yes :tangle "sourcecode.py"
@@ -106,7 +179,7 @@ def loadFiles() -> ConfigFile:
     return ConfigFile(_fontImage, config)
 #+end_src
 
-** File class
+*** File class
 
 The file class is an immutable data container that holds the information needed for the game to function
 
@@ -124,10 +197,11 @@ class ConfigFile:
 
 
 
-* Sprite class
+*** Tilesheet class
 
 #+Name: TileSheet
 #+begin_src python :noweb yes :tangle "sourcecode.py"
+@dataclass(frozen=True)
 class TileSheet:
     _tiles = [pygame.Surface]
     def __init__(self,
@@ -146,7 +220,6 @@ class TileSheet:
                 )
 #+end_src
 
-
 * Window handler
 
 The window class is where the initializing is going to happen, as well as where the pygame window.
@@ -164,6 +237,7 @@ class Window():
     def surface(self) -> pygame.Surface:
         return self._surface
 #+end_src
+
 
 * View MIGHT BE REMOVED
 
@@ -199,10 +273,22 @@ class View:
         pass
 #+end_src
 
+The view function takes the relevant actor and centers the map on it.
+
+#+Name: View
+#+begin_src python :nowrap yes :tangle "sourcecode.py"
+def View(actor : Actor,
+         surface : pygame.Surface,
+         view : pygame.Rect) -> pygame.Surface:
+    _view = view
+    _view.center = actor.currxy()
+    return surface.subsurface(_view)
+#+end_src
 
 
 * Drawing
 
+** Drawmap
 Drawmap function is only called to draw the surface of the static map.
 
 #+Name: DrawMap
@@ -219,6 +305,7 @@ def drawMap(map : str,
     destination.blits(_drawingList)
 #+end_src
 
+** Drawing 
 The drawing function takes one or more characters and draws them to the screen.
 
 #+Name: Drawing
@@ -230,9 +317,12 @@ def drawing(chars : str,
     _drawingList : [(pygame.Surface,(int,int))] = []
     x = 0
     y = 0
+
     for ind, c in enumerate(chars):
         _drawingList.append((tiles[ord(c)+1], pos[ind]))
     destination.blits(_drawingList)
+
+
 #+end_src
 
 
@@ -282,6 +372,7 @@ class Map:
         return self._map
 #+end_src
 
+
 * Actor list
 
 The actor list is where a list of actors are being created.
@@ -319,15 +410,20 @@ def GameLoop(window, _map, tiles):
         currVec = move(player.currxy(), nxtVec)
         player = Actor( '@',currVec, nxtVec)
         window.surface().blit(_map.map(), (0,0))
-        drawing(player._char(), [player.currxy()], tiles._tiles, window.surface())
+        drawing(str(player), [player.currxy()], tiles._tiles, window.surface())
         pygame.display.flip()
         log.append("current vector : " + str(currVec) + "nxtVector : " + str(nxtVec) + "has player arrived: " + str(player.arrived()))
         cl.tick_busy_loop(60)
+    pprint.pprint(_map.map())
 #+end_src
+
+* Texthandling
+
+
 
 * Actor
 
-The player class is, for now just a place holder, keeping the player char (literally a char value), position and that's it. It contains a check method, and two properties.
+The player class is, for now just a place holder, keeping the player char (literally a char value), position and that's it. It does also use a couple of standard operators that I've overloaded to return just a string.
 
 #+Name: Actorclass
 #+begin_src python :noweb yes :tangle "sourcecode.py"
@@ -345,38 +441,10 @@ class Actor:
     def nxtxy(self):
         return self._xy
 
-    def _char(self):
+    def __repr__(self):
         return self._c
 #+end_src
 
-* Player relevant functions
-
-These functions return relevant values for a player class
-
-** Input player movement
-
-for now I just handle the input through a simple function that checks whether or not a valid key has been pressed.
-
-#+Name: Input
-#+begin_src python :noweb yes :tangle "sourcecode.py"
-def getInput(ev):
-    inputList = { pygame.K_UP : (0,-1),
-                  pygame.K_DOWN : (0,1),
-                  pygame.K_LEFT : (-1, 0),
-                  pygame.K_RIGHT : (1, 0),
-    }
-    return inputList.get(ev.key, (0,0))
-#+end_src
-
-* Collide
-
-The collide function gets two position tuples and checks if they are the same, if they are it returns true if not it returns false
-
-#+Name: Collision
-#+begin_src python :noweb yes :tangle "sourcecode.py"
-def collision(xy, _xy):
-    return xy == _xy
-#+end_src
 
 * Update Actors
 
@@ -395,23 +463,6 @@ def updateActor(lstOfActors : [Actor]) -> [Actor]:
     pass
 #+end_src
 
-* Move
-
-Move function is just meant to take tqwo positional arguments, the current position and the destination, and return a new tuple with the new current position. I believe It *could* theoretically maybe, potentially handle diagonal movement - ish but this is just you grandmas 4 directional moves.
-
-#+Name: Move
-#+begin_src python :nowrap yes :tangle "sourcecode.py"
-def move(xy : (int, int), _xy : (int, int)) -> (int, int):
-    acc = []
-    for n, _n in zip(xy, _xy):
-        if n > _n:
-            n = n - 2
-        elif n < _n:
-            n = n + 2
-        acc.append(n)
-    return tuple(acc)
-
-#+end_src
 
 
 * Main

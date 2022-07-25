@@ -5,22 +5,64 @@ import pprint
 from pygame.locals import *
 import numpy
 from collections.abc import Callable
-from functools import reduce, cache
+from functools import reduce, cache, wraps, partial
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field
+import operator
 
 CELLSIZE = 32
 FONTFILE = "terminal8x8_gs_ro.png"
 
-class FileLoader():
-    _fontimage : pygame.Surface
-    def __init__(self, filename : str):
-        self._fontimage = pygame.image.load("terminal8x8_gs_ro.png")
-        self._fontimage.set_colorkey((0,0,0))
+def Cell(cell : (int, int)) -> (int, int):
+    return tuple(map(lambda n : n * CELLSIZE, cell))
 
-    def GetTileSet(self):
-        pass
+def collision(xy, _xy):
+    return xy == _xy
 
+def move(xy : (int,int), _xy : (int, int)) -> (int, int):
+    acc = []
+    for n, _n in zip(xy, _xy):
+        if n > _n:
+            n = n - 2
+        elif n < _n:
+            n = n + 2
+        acc.append(n)
+    return tuple(acc)
+
+@dataclass(frozen=True)
+class Vector:
+    x : int
+    y : int
+    def __add__(self, other):
+        return Vector(self.x + other.x, self.y + other.y)
+    def __sub__(self, other):
+        return Vector(self.x - other.x, self.y - other.y)
+
+def getInput(ev):
+    inputList = { pygame.K_UP : (0,-1),
+                  pygame.K_DOWN : (0,1),
+                  pygame.K_LEFT : (-1, 0),
+                  pygame.K_RIGHT : (1, 0),
+    }
+    return inputList.get(ev.key, (0,0))
+
+def loadFiles() -> ConfigFile:
+    _fontImage = pygame.image.load("terminal8x8_gs_ro.png")
+    _fontImage.set_colorkey((0,0,0))
+    with open('conf.json', 'r') as _file:
+        config = json.load(_file)
+    return ConfigFile(_fontImage, config)
+
+@dataclass(frozen=True)
+class ConfigFile:
+    _image : pygame.Surface
+    _conf : dict
+    def image(self) -> pygame.Surface:
+        return self._image
+    def config(self) -> dict:
+        return self._conf
+
+@dataclass(frozen=True)
 class TileSheet:
     _tiles = [pygame.Surface]
     def __init__(self,
@@ -73,6 +115,13 @@ class View:
     def update(self) -> pygame.Surface:
         pass
 
+def View(actor : Actor,
+         surface : pygame.Surface,
+         view : pygame.Rect) -> pygame.Surface:
+    _view = view
+    _view.center = actor.currxy()
+    return surface.subsurface(_view)
+
 def drawMap(map : str,
             pos : [(int, int)],
             tiles : [pygame.Surface],
@@ -91,6 +140,7 @@ def drawing(chars : str,
     _drawingList : [(pygame.Surface,(int,int))] = []
     x = 0
     y = 0
+
     for ind, c in enumerate(chars):
         _drawingList.append((tiles[ord(c)+1], pos[ind]))
     destination.blits(_drawingList)
@@ -132,13 +182,18 @@ class Map:
     def map(self):
         return self._map
 
-def GameLoop(window, map, tiles):
+def makeActors(amount : int, playerIndex : int) -> [Player]:
+    pass
+
+def GameLoop(window, _map, tiles):
     running = True
-    player = Player((32,32), (32,32), '@')
-    movVec = (0,0)
-    currVec = player.xy()
-    nxtVec = player._xy()
-    while(out):
+    player = Actor('@',(32,32), (32,32))
+    currVec = player.currxy()
+    nxtVec = player.nxtxy()
+    log = []
+    cl = pygame.time.Clock()
+    while(running):
+        movVec = (0,0)
         for event in pygame.event.get():
             match event.type:
                 case pygame.QUIT:
@@ -147,57 +202,48 @@ def GameLoop(window, map, tiles):
                     movVec = getInput(event)
         if player.arrived():
             nxtVec = tuple(map(lambda n, _n: n + ( _n * CELLSIZE), nxtVec, movVec))           
-        currVec = move(player.xy(), nxtVec)
-        player = Player(currVec, nxtVec, '@')
-        window.surface().blit(map.map(), (0,0))
-        drawing(player._char(), [player.xy()], tiles._tiles, window.surface())
+        currVec = move(player.currxy(), nxtVec)
+        player = Actor( '@',currVec, nxtVec)
+        window.surface().blit(_map.map(), (0,0))
+        drawing(str(player), [player.currxy()], tiles._tiles, window.surface())
         pygame.display.flip()
-    pprint.pprint(str(player.xy()) + ", " + str(player._xy()))
-    #pprint.pprint(map._pos)
-        # Run game
+        log.append("current vector : " + str(currVec) + "nxtVector : " + str(nxtVec) + "has player arrived: " + str(player.arrived()))
+        cl.tick_busy_loop(60)
+    pprint.pprint(_map.map())
 
 @dataclass(frozen=True)
-class Player:
-    xy : (int, int)
-    _xy : (int, int)
-    _c : chr
-
+class Actor:
+    _c : chr = field(init=True)
+    xy : (int, int) = field(init=True)
+    _xy : (int, int) = field(init=True)
     def arrived(self) -> bool:
-        return self.xy() == self._xy()
+        return self.xy == self._xy
 
-    def xy(self):
+    def currxy(self):
         return self.xy
 
-    def _xy(self):
+    def nxtxy(self):
         return self._xy
 
-    def _char(self):
+    def __repr__(self):
         return self._c
 
-def getInput(ev):
-    inputList = { pygame.K_UP : (0,-1),
-                  pygame.K_DOWN : (0,1),
-                  pygame.K_LEFT : (-1, 0),
-                  pygame.K_RIGHT : (1, 0),
-    }
-    return inputList.get(ev.key, (0,0))
-
-def move(xy : (int, int), _xy : (int, int)) -> (int, int):
-    acc = []
-    for n, _n in zip(xy, _xy):
-        if n > _n:
-            n = n - 1
-        elif n < _n:
-            n = n + 1
-        acc.append(n)
-    return tuple(lst)
+def updateActor(lstOfActors : [Actor]) -> [Actor]:
+    # retLst = []
+    # #check collision
+    # lstCollision
+    # for nxt in lstOfActors:
+    #     lstCollision.append(nxt.
+    # for actor in lstOfActors:
+    #     currVec = move(actor.currxy(), actor.nxtxy())
+    pass
 
 def main():
     pygame.init()
     pygame.font.init()
     # -------
-    _files = FileLoader("terminal8x8_gs_ro.png")
-    _tiles = TileSheet(_files._fontimage, 8, 8, 16, 16)
+    _files = loadFiles()
+    _tiles = TileSheet(_files.image(), 8, 8, 16, 16)
     window = Window(800, 600)
     map = Map(_tiles._tiles)
     GameLoop(window, map, _tiles)
