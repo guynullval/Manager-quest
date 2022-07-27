@@ -6,15 +6,25 @@
 \BOOKMARK [2][-]{subsection.5.1}{List of stats to consider:}{section.5}% 6
 \BOOKMARK [1][-]{section.6}{Code}{}% 7
 \BOOKMARK [1][-]{section.7}{Globals}{}% 8
-\BOOKMARK [1][-]{section.8}{Cell function}{}% 9
-\BOOKMARK [1][-]{section.9}{Ressource handler}{}% 10
-\BOOKMARK [1][-]{section.10}{Sprite class}{}% 11
-\BOOKMARK [1][-]{section.11}{Window handler}{}% 12
-\BOOKMARK [1][-]{section.12}{View MIGHT BE REMOVED}{}% 13
-\BOOKMARK [1][-]{section.13}{Drawing}{}% 14
-\BOOKMARK [1][-]{section.14}{Map}{}% 15
-\BOOKMARK [1][-]{section.15}{Game Loop function}{}% 16
-\BOOKMARK [1][-]{section.16}{Player}{}% 17
-\BOOKMARK [1][-]{section.17}{Input player movement}{}% 18
-\BOOKMARK [1][-]{section.18}{Move}{}% 19
-\BOOKMARK [1][-]{section.19}{Main}{}% 20
+\BOOKMARK [1][-]{section.8}{Positional handling}{}% 9
+\BOOKMARK [2][-]{subsection.8.1}{Cell function}{section.8}% 10
+\BOOKMARK [2][-]{subsection.8.2}{Collision}{section.8}% 11
+\BOOKMARK [2][-]{subsection.8.3}{Move}{section.8}% 12
+\BOOKMARK [2][-]{subsection.8.4}{Vector data struct}{section.8}% 13
+\BOOKMARK [1][-]{section.9}{Input}{}% 14
+\BOOKMARK [2][-]{subsection.9.1}{Input player movement}{section.9}% 15
+\BOOKMARK [2][-]{subsection.9.2}{Ressource handler}{section.9}% 16
+\BOOKMARK [3][-]{subsubsection.9.2.1}{File class}{subsection.9.2}% 17
+\BOOKMARK [3][-]{subsubsection.9.2.2}{Tilesheet class}{subsection.9.2}% 18
+\BOOKMARK [1][-]{section.10}{Window handler}{}% 19
+\BOOKMARK [1][-]{section.11}{View MIGHT BE REMOVED}{}% 20
+\BOOKMARK [1][-]{section.12}{Drawing}{}% 21
+\BOOKMARK [2][-]{subsection.12.1}{Drawmap}{section.12}% 22
+\BOOKMARK [2][-]{subsection.12.2}{Drawing}{section.12}% 23
+\BOOKMARK [1][-]{section.13}{Map}{}% 24
+\BOOKMARK [1][-]{section.14}{Actor list}{}% 25
+\BOOKMARK [1][-]{section.15}{Game Loop function}{}% 26
+\BOOKMARK [1][-]{section.16}{Texthandling}{}% 27
+\BOOKMARK [1][-]{section.17}{Actor}{}% 28
+\BOOKMARK [1][-]{section.18}{Update Actors}{}% 29
+\BOOKMARK [1][-]{section.19}{Main}{}% 30

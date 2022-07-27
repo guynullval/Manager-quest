@@ -6,15 +6,25 @@
 \contentsline {subsection}{\numberline {5.1}List of stats to consider:}{3}{subsection.5.1}%
 \contentsline {section}{\numberline {6}Code}{3}{section.6}%
 \contentsline {section}{\numberline {7}Globals}{4}{section.7}%
-\contentsline {section}{\numberline {8}Cell function}{4}{section.8}%
-\contentsline {section}{\numberline {9}Ressource handler}{4}{section.9}%
-\contentsline {section}{\numberline {10}Sprite class}{5}{section.10}%
-\contentsline {section}{\numberline {11}Window handler}{5}{section.11}%
-\contentsline {section}{\numberline {12}View MIGHT BE REMOVED}{5}{section.12}%
-\contentsline {section}{\numberline {13}Drawing}{6}{section.13}%
-\contentsline {section}{\numberline {14}Map}{7}{section.14}%
-\contentsline {section}{\numberline {15}Game Loop function}{8}{section.15}%
-\contentsline {section}{\numberline {16}Player}{9}{section.16}%
-\contentsline {section}{\numberline {17}Input player movement}{9}{section.17}%
-\contentsline {section}{\numberline {18}Move}{10}{section.18}%
-\contentsline {section}{\numberline {19}Main}{10}{section.19}%
+\contentsline {section}{\numberline {8}Positional handling}{4}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Cell function}{4}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Collision}{5}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Move}{5}{subsection.8.3}%
+\contentsline {subsection}{\numberline {8.4}Vector data struct}{5}{subsection.8.4}%
+\contentsline {section}{\numberline {9}Input}{6}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Input player movement}{6}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Ressource handler}{6}{subsection.9.2}%
+\contentsline {subsubsection}{\numberline {9.2.1}File class}{6}{subsubsection.9.2.1}%
+\contentsline {subsubsection}{\numberline {9.2.2}Tilesheet class}{7}{subsubsection.9.2.2}%
+\contentsline {section}{\numberline {10}Window handler}{7}{section.10}%
+\contentsline {section}{\numberline {11}View MIGHT BE REMOVED}{7}{section.11}%
+\contentsline {section}{\numberline {12}Drawing}{8}{section.12}%
+\contentsline {subsection}{\numberline {12.1}Drawmap}{8}{subsection.12.1}%
+\contentsline {subsection}{\numberline {12.2}Drawing}{9}{subsection.12.2}%
+\contentsline {section}{\numberline {13}Map}{9}{section.13}%
+\contentsline {section}{\numberline {14}Actor list}{10}{section.14}%
+\contentsline {section}{\numberline {15}Game Loop function}{11}{section.15}%
+\contentsline {section}{\numberline {16}Texthandling}{11}{section.16}%
+\contentsline {section}{\numberline {17}Actor}{11}{section.17}%
+\contentsline {section}{\numberline {18}Update Actors}{12}{section.18}%
+\contentsline {section}{\numberline {19}Main}{12}{section.19}%
