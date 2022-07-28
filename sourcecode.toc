@@ -1,30 +1,40 @@
 \contentsline {section}{\numberline {1}introduction}{2}{section.1}%
 \contentsline {section}{\numberline {2}Basic idea}{2}{section.2}%
-\contentsline {section}{\numberline {3}"Races"}{2}{section.3}%
-\contentsline {section}{\numberline {4}Classes}{2}{section.4}%
-\contentsline {section}{\numberline {5}Stats}{3}{section.5}%
-\contentsline {subsection}{\numberline {5.1}List of stats to consider:}{3}{subsection.5.1}%
-\contentsline {section}{\numberline {6}Code}{3}{section.6}%
-\contentsline {section}{\numberline {7}Globals}{4}{section.7}%
-\contentsline {section}{\numberline {8}Positional handling}{4}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Cell function}{4}{subsection.8.1}%
-\contentsline {subsection}{\numberline {8.2}Collision}{5}{subsection.8.2}%
-\contentsline {subsection}{\numberline {8.3}Move}{5}{subsection.8.3}%
-\contentsline {subsection}{\numberline {8.4}Vector data struct}{5}{subsection.8.4}%
-\contentsline {section}{\numberline {9}Input}{6}{section.9}%
-\contentsline {subsection}{\numberline {9.1}Input player movement}{6}{subsection.9.1}%
-\contentsline {subsection}{\numberline {9.2}Ressource handler}{6}{subsection.9.2}%
-\contentsline {subsubsection}{\numberline {9.2.1}File class}{6}{subsubsection.9.2.1}%
-\contentsline {subsubsection}{\numberline {9.2.2}Tilesheet class}{7}{subsubsection.9.2.2}%
-\contentsline {section}{\numberline {10}Window handler}{7}{section.10}%
-\contentsline {section}{\numberline {11}View MIGHT BE REMOVED}{7}{section.11}%
-\contentsline {section}{\numberline {12}Drawing}{8}{section.12}%
-\contentsline {subsection}{\numberline {12.1}Drawmap}{8}{subsection.12.1}%
-\contentsline {subsection}{\numberline {12.2}Drawing}{9}{subsection.12.2}%
-\contentsline {section}{\numberline {13}Map}{9}{section.13}%
-\contentsline {section}{\numberline {14}Actor list}{10}{section.14}%
-\contentsline {section}{\numberline {15}Game Loop function}{11}{section.15}%
-\contentsline {section}{\numberline {16}Texthandling}{11}{section.16}%
-\contentsline {section}{\numberline {17}Actor}{11}{section.17}%
-\contentsline {section}{\numberline {18}Update Actors}{12}{section.18}%
-\contentsline {section}{\numberline {19}Main}{12}{section.19}%
+\contentsline {section}{\numberline {3}Actor\hfill {}\textsc {Actor}}{2}{section.3}%
+\contentsline {subsection}{\numberline {3.1}"Races"\hfill {}\textsc {Races}}{2}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Classes\hfill {}\textsc {Class}}{3}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Stats\hfill {}\textsc {Stats}}{3}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}List of stats to consider:}{3}{subsubsection.3.3.1}%
+\contentsline {subsubsection}{\numberline {3.3.2}In game stats}{4}{subsubsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.4}Spells}{4}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}HR Guidelines}{5}{subsection.3.5}%
+\contentsline {section}{\numberline {4}Code}{5}{section.4}%
+\contentsline {section}{\numberline {5}Globals}{5}{section.5}%
+\contentsline {section}{\numberline {6}Positional handling\hfill {}\textsc {Position}}{5}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Cell function\hfill {}\textsc {Coordinate}}{6}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Collision\hfill {}\textsc {Collision}}{6}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Move\hfill {}\textsc {Update}}{6}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Vector\hfill {}\textsc {Datacontainer::Coordinate}}{6}{subsection.6.4}%
+\contentsline {section}{\numberline {7}Input\hfill {}\textsc {IO}}{7}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Input player movement}{7}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Ressource handler\hfill {}\textsc {File}}{7}{subsection.7.2}%
+\contentsline {subsubsection}{\numberline {7.2.1}File class\hfill {}\textsc {datacontainer}}{8}{subsubsection.7.2.1}%
+\contentsline {subsubsection}{\numberline {7.2.2}Tilesheet class\hfill {}\textsc {datacontainer}}{8}{subsubsection.7.2.2}%
+\contentsline {section}{\numberline {8}Time}{8}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Turn\hfill {}\textsc {datacontainer}}{9}{subsection.8.1}%
+\contentsline {section}{\numberline {9}Window handler}{9}{section.9}%
+\contentsline {section}{\numberline {10}View MIGHT BE REMOVED}{9}{section.10}%
+\contentsline {section}{\numberline {11}Drawing\hfill {}\textsc {Onscreen}}{10}{section.11}%
+\contentsline {subsection}{\numberline {11.1}Drawmap\hfill {}\textsc {Map}}{10}{subsection.11.1}%
+\contentsline {subsection}{\numberline {11.2}Drawing\hfill {}\textsc {Characters}}{11}{subsection.11.2}%
+\contentsline {section}{\numberline {12}Map\hfill {}\textsc {Map}}{11}{section.12}%
+\contentsline {section}{\numberline {13}Actor list\hfill {}\textsc {Actor}}{12}{section.13}%
+\contentsline {section}{\numberline {14}Game Loop function}{12}{section.14}%
+\contentsline {section}{\numberline {15}{\bfseries \sffamily TODO} Text\hfill {}\textsc {Text}}{13}{section.15}%
+\contentsline {subsection}{\numberline {15.1}{\bfseries \sffamily TODO} Textprinting\hfill {}\textsc {Onscreen}}{13}{subsection.15.1}%
+\contentsline {subsection}{\numberline {15.2}{\bfseries \sffamily TODO} Textformatting}{13}{subsection.15.2}%
+\contentsline {subsection}{\numberline {15.3}{\bfseries \sffamily TODO} Textinput}{13}{subsection.15.3}%
+\contentsline {section}{\numberline {16}Actor\hfill {}\textsc {Actor}}{13}{section.16}%
+\contentsline {subsection}{\numberline {16.1}Actor class\hfill {}\textsc {Datacontainer}}{14}{subsection.16.1}%
+\contentsline {subsection}{\numberline {16.2}Update Actors}{14}{subsection.16.2}%
+\contentsline {section}{\numberline {17}Main}{14}{section.17}%

@@ -1,4 +1,4 @@
-% Created 2022-07-26 Tue 00:05
+% Created 2022-07-28 Thu 13:44
 % Intended LaTeX compiler: pdflatex
 \documentclass[11pt]{article}
 \usepackage[utf8]{inputenc}
@@ -28,15 +28,20 @@
 
 
 \section{introduction}
-\label{sec:orgabdef5d}
+\label{sec:org30fbc15}
 
 \section{Basic idea}
-\label{sec:org8c9ae69}
+\label{sec:orge5f1cb4}
 
 A dungeon crawler set in a modern day office space (with cubicles, cantinas etc.) instead of fighting I need another way of handling engagement.
 
-\section{"Races"}
-\label{sec:orgcb8e7fd}
+\section{Actor\hfill{}\textsc{Actor}}
+\label{sec:org0c34810}
+
+An actor is anything that is supposed to have sentience and behaviour ingame.
+
+\subsection{"Races"\hfill{}\textsc{Races}}
+\label{sec:org79d5564}
 
 \begin{itemize}
 \item Zzzombie - the constantly sleepy coworker, never seems to be quite awake nor have they had a good nights sleep in their life.
@@ -48,26 +53,28 @@ A dungeon crawler set in a modern day office space (with cubicles, cantinas etc.
 \end{itemize}
 
 
-\section{Classes}
-\label{sec:org6296986}
+\subsection{Classes\hfill{}\textsc{Class}}
+\label{sec:orga7c3347}
 
 \begin{itemize}
 \item Financial
-\item IT
+\item IT Wizard
 \item Assistant
 \item Intern
 \item Secretary
 \item Janitor
+\item Manager
+\item HR
 \item Boss
 \end{itemize}
 
-\section{Stats}
-\label{sec:orgf0513aa}
+\subsection{Stats\hfill{}\textsc{Stats}}
+\label{sec:org1df1ee9}
 
 Stats in an RPG is like\ldots{} something\ldots{} really\ldots{} hmm (ed: come back with a zinger here). Usually the stats in a traditional roguelike might be something akin to - Constitution, Strength, Wisdom, Intelligence etc. basically if you've seen a rulebook for a TTRPG you can probably recognize most of these AND THEY WORK! that's why people use them, they really REALLY work. I'm not choosing differently because I think I can do better, but because, well since the game is already set in a modern office environment, there's little reason to not have some weird quirk with the stats again.
 
-\subsection{List of stats to consider:}
-\label{sec:org068ab22}
+\subsubsection{List of stats to consider:}
+\label{sec:orgf5d491d}
 \begin{itemize}
 \item Neuroticism: how panicked and alert a player is about their surrounding.
 \item Openness: how open they can allow themself to be.
@@ -82,11 +89,47 @@ I Really REALLY wanted to put "Agility" into this stat list, but not agility as 
 
 So that's the N.O.R.M.A.L. stat system (you'd think I'd have picked these words carefully\ldots{} and you'd be right) patent pending yadda yadda.
 
+\subsubsection{In game stats}
+\label{sec:org3f9fd3b}
+
+Health
+\begin{itemize}
+\item Phys-Health
+\begin{itemize}
+\item is made out of Laziness (the lower the laziness the higher the health), Openness
+\end{itemize}
+\item Mental-Health
+\begin{itemize}
+\item is made out of Madness, Reasoning.
+\end{itemize}
+\item Social-Health
+\begin{itemize}
+\item Agreeableness, Neuroticism
+\end{itemize}
+
+\item HR-cana
+\begin{itemize}
+\item Is defined by Madness, Agreeableness
+\end{itemize}
+\item 
+\end{itemize}
+
+
+\subsection{Spells}
+\label{sec:orgaf3bed3}
+
+A magic system wouldn't really work in a contemporary world. There is however something more arcane and mysterious that I can employ which is: HR guidelines.
+
+\subsection{HR Guidelines}
+\label{sec:orgd80c8e5}
+
+The HR guidelines should, like all magic systems. Affect stats in some way.
+
 \section{Code}
-\label{sec:org9701cf3}
+\label{sec:org674b2d0}
 
 How neat would it be if we could quit here? alas now we have to try and code this :S 
-
+Ah well into the fray.
 
 
 
@@ -102,10 +145,11 @@ from functools import reduce, cache, wraps, partial
 import json
 from dataclasses import dataclass, field
 import operator
+import rx
 \end{verbatim}
 
 \section{Globals}
-\label{sec:orgee6c466}
+\label{sec:org345a086}
 
 Global variables are frowned upon by virtually everyone and their mom, which is fair, I don't like them either, but I don't have a better idea.
 
@@ -114,20 +158,19 @@ Global variables are the following
 \item cell size, i.e. how large the cell that fills the screen surface should be. Then I can later just divide the screenwidth or screenheight of the drawing destination surface by the cell size to know how big the are is. (so I don't draw outside the screen/surface), this is also where I'm placing the filenames for fonts which I might need/want to change.
 \end{itemize}
 
-
 \begin{verbatim}
 CELLSIZE = 32
 FONTFILE = "terminal8x8_gs_ro.png"
 \end{verbatim}
 
 
-\section{Positional handling}
-\label{sec:orge7cc6b4}
+\section{Positional handling\hfill{}\textsc{Position}}
+\label{sec:org3ff2447}
 
 Positional functions all tackles different aspect of onscreen positioning. Things lige moving, checking collisions. multiplying a vector tuple so that it uses the correct 
 
-\subsection{Cell function}
-\label{sec:org3daac51}
+\subsection{Cell function\hfill{}\textsc{Coordinate}}
+\label{sec:orge37d44c}
 
 The cell function handles converting the direction vectors into coordinates that can be used on the screen
 
@@ -137,8 +180,8 @@ def Cell(cell : (int, int)) -> (int, int):
 \end{verbatim}
 
 
-\subsection{Collision}
-\label{sec:orgf07b063}
+\subsection{Collision\hfill{}\textsc{Collision}}
+\label{sec:orga35f0f7}
 
 The collision function gets two position tuples and checks if they are the same, if they are it returns true if not it returns false
 
@@ -148,8 +191,8 @@ def collision(xy, _xy):
 \end{verbatim}
 
 
-\subsection{Move}
-\label{sec:org9997826}
+\subsection{Move\hfill{}\textsc{Update}}
+\label{sec:orge98f3f6}
 
 Move function is just meant to take tqwo positional arguments, the current position and the destination, and return a new tuple with the new current position. I believe It \textbf{could} theoretically maybe, potentially handle diagonal movement - ish but this is just you grandmas 4 directional moves.
 
@@ -167,8 +210,10 @@ def move(xy : (int,int), _xy : (int, int)) -> (int, int):
 \end{verbatim}
 
 
-\subsection{Vector data struct}
-\label{sec:orgab78fa8}
+\subsection{Vector\hfill{}\textsc{Datacontainer::Coordinate}}
+\label{sec:org2cfcb61}
+
+The vector class is basically a copy of a tuple datatype, however it has the added "\uline{\uline{add}}" and "\uline{\uline{sub}}" methods defined. I don't really need (at the moment) to handle more "advanced" features like vector dot product and so on.
 
 \begin{verbatim}
 @dataclass(frozen=True)
@@ -182,11 +227,11 @@ class Vector:
 \end{verbatim}
 
 
-\section{Input}
-\label{sec:org466a1c6}
+\section{Input\hfill{}\textsc{IO}}
+\label{sec:orgd7be312}
 
 \subsection{Input player movement}
-\label{sec:orgcc40204}
+\label{sec:org6d977e0}
 
 for now I just handle the input through a simple function that checks whether or not a valid key has been pressed. if not it returns a (0,0) vector. 
 
@@ -204,8 +249,8 @@ def getInput(ev):
 
 
 
-\subsection{Ressource handler}
-\label{sec:orgf832be1}
+\subsection{Ressource handler\hfill{}\textsc{File}}
+\label{sec:org9dede2f}
 
 Another euqually import (or more important input) is the different ressources. For now it is only a config json file and a tilesheet, I'm interested in, but it could expand to more tilesheets, or even premade levels (or templates). The ressources are being loaded into a file class that holds the different information.
 
@@ -218,8 +263,8 @@ def loadFiles() -> ConfigFile:
     return ConfigFile(_fontImage, config)
 \end{verbatim}
 
-\subsubsection{File class}
-\label{sec:org86f23f5}
+\subsubsection{File class\hfill{}\textsc{datacontainer}}
+\label{sec:orgbd547a6}
 
 The file class is an immutable data container that holds the information needed for the game to function
 
@@ -236,8 +281,10 @@ class ConfigFile:
 
 
 
-\subsubsection{Tilesheet class}
-\label{sec:orgde1f412}
+\subsubsection{Tilesheet class\hfill{}\textsc{datacontainer}}
+\label{sec:org8f74aac}
+
+
 
 \begin{verbatim}
 @dataclass(frozen=True)
@@ -259,8 +306,31 @@ class TileSheet:
                 )
 \end{verbatim}
 
+
+\section{Time}
+\label{sec:org801fb4e}
+
+\begin{center}
+time where did you go?\ldots{}. aaaand that's all I had time for
+\end{center}
+
+In the game there's going to be two kinds of time. Firstly a realtime module that just makes sure we don't call the draw function more than 60 times a second (at most) because let's be honest\ldots{} it's a text based engine so it's kindda dumb to blow up the GPU for \textbf{that}
+
+But the second kind of time is the ingame time. That's based on turns. Every turn everything that can (and should) move, moves.
+
+\subsection{Turn\hfill{}\textsc{datacontainer}}
+\label{sec:orgfc4f286}
+
+The turn class is a data container class (get used to be seeing those around btw. ) that takes care of storing whatever information a turn need.
+\begin{verbatim}
+@dataclass(frozen=Turn)
+class Turn:
+    turn : int
+\end{verbatim}
+
+
 \section{Window handler}
-\label{sec:org7ab670c}
+\label{sec:org48075b0}
 
 The window class is where the initializing is going to happen, as well as where the pygame window.
 
@@ -279,7 +349,7 @@ class Window():
 
 
 \section{View MIGHT BE REMOVED}
-\label{sec:org06796e7}
+\label{sec:org451206e}
 
 The view holds a surface and a pygame.Rect. The rect is moved around to "slice" a subsurface from the map. 
 
@@ -324,11 +394,11 @@ def View(actor : Actor,
 \end{verbatim}
 
 
-\section{Drawing}
-\label{sec:org3060db8}
+\section{Drawing\hfill{}\textsc{Onscreen}}
+\label{sec:org77386a0}
 
-\subsection{Drawmap}
-\label{sec:orgf37f990}
+\subsection{Drawmap\hfill{}\textsc{Map}}
+\label{sec:org8b48d21}
 Drawmap function is only called to draw the surface of the static map.
 
 \begin{verbatim}
@@ -344,8 +414,8 @@ def drawMap(map : str,
     destination.blits(_drawingList)
 \end{verbatim}
 
-\subsection{Drawing}
-\label{sec:org377e17e}
+\subsection{Drawing\hfill{}\textsc{Characters}}
+\label{sec:org181906c}
 The drawing function takes one or more characters and draws them to the screen.
 
 \begin{verbatim}
@@ -365,8 +435,8 @@ def drawing(chars : str,
 \end{verbatim}
 
 
-\section{Map}
-\label{sec:orgb1f452d}
+\section{Map\hfill{}\textsc{Map}}
+\label{sec:orga47f204}
 
 the map is for now just a container class for a premade "dungeon", this is to test whether or not the drawing function can handle the sheer drawing calls. AND that it can handle the various characters.
 
@@ -412,8 +482,8 @@ class Map:
 \end{verbatim}
 
 
-\section{Actor list}
-\label{sec:org3d99174}
+\section{Actor list\hfill{}\textsc{Actor}}
+\label{sec:org5ef3cf5}
 
 The actor list is where a list of actors are being created.
 
@@ -424,7 +494,7 @@ def makeActors(amount : int, playerIndex : int) -> [Player]:
 
 
 \section{Game Loop function}
-\label{sec:org72f4636}
+\label{sec:org53aee92}
 
 The Game loop is where the structure of the game is at.
 
@@ -456,16 +526,29 @@ def GameLoop(window, _map, tiles):
     pprint.pprint(_map.map())
 \end{verbatim}
 
-\section{Texthandling}
-\label{sec:orge73a0bc}
+
+\section{{\bfseries\sffamily TODO} Text\hfill{}\textsc{Text}}
+\label{sec:orge1c0444}
+
+\subsection{{\bfseries\sffamily TODO} Textprinting\hfill{}\textsc{Onscreen}}
+\label{sec:org428af1a}
+
+\subsection{{\bfseries\sffamily TODO} Textformatting}
+\label{sec:orgb04070c}
+
+\subsection{{\bfseries\sffamily TODO} Textinput}
+\label{sec:org26f1ada}
 
 
 
-\section{Actor}
-\label{sec:org3ae993f}
+\section{Actor\hfill{}\textsc{Actor}}
+\label{sec:org007a2f5}
 
 The player class is, for now just a place holder, keeping the player char (literally a char value), position and that's it. It does also use a couple of standard operators that I've overloaded to return just a string.
 
+
+\subsection{Actor class\hfill{}\textsc{Datacontainer}}
+\label{sec:org54f1a8e}
 \begin{verbatim}
 @dataclass(frozen=True)
 class Actor:
@@ -486,8 +569,8 @@ class Actor:
 \end{verbatim}
 
 
-\section{Update Actors}
-\label{sec:org394d52f}
+\subsection{Update Actors}
+\label{sec:org5fb9c53}
 
 The update actor function is going to map onto the list of actors in the game.
 
@@ -506,7 +589,7 @@ def updateActor(lstOfActors : [Actor]) -> [Actor]:
 
 
 \section{Main}
-\label{sec:orge58cd1c}
+\label{sec:orgb23b180}
 
 In the main function I initialize the different components, like the window, the gameloop function, etc.
 

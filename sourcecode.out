@@ -1,30 +1,40 @@
 \BOOKMARK [1][-]{section.1}{introduction}{}% 1
 \BOOKMARK [1][-]{section.2}{Basic idea}{}% 2
-\BOOKMARK [1][-]{section.3}{"Races"}{}% 3
-\BOOKMARK [1][-]{section.4}{Classes}{}% 4
-\BOOKMARK [1][-]{section.5}{Stats}{}% 5
-\BOOKMARK [2][-]{subsection.5.1}{List of stats to consider:}{section.5}% 6
-\BOOKMARK [1][-]{section.6}{Code}{}% 7
-\BOOKMARK [1][-]{section.7}{Globals}{}% 8
-\BOOKMARK [1][-]{section.8}{Positional handling}{}% 9
-\BOOKMARK [2][-]{subsection.8.1}{Cell function}{section.8}% 10
-\BOOKMARK [2][-]{subsection.8.2}{Collision}{section.8}% 11
-\BOOKMARK [2][-]{subsection.8.3}{Move}{section.8}% 12
-\BOOKMARK [2][-]{subsection.8.4}{Vector data struct}{section.8}% 13
-\BOOKMARK [1][-]{section.9}{Input}{}% 14
-\BOOKMARK [2][-]{subsection.9.1}{Input player movement}{section.9}% 15
-\BOOKMARK [2][-]{subsection.9.2}{Ressource handler}{section.9}% 16
-\BOOKMARK [3][-]{subsubsection.9.2.1}{File class}{subsection.9.2}% 17
-\BOOKMARK [3][-]{subsubsection.9.2.2}{Tilesheet class}{subsection.9.2}% 18
-\BOOKMARK [1][-]{section.10}{Window handler}{}% 19
-\BOOKMARK [1][-]{section.11}{View MIGHT BE REMOVED}{}% 20
-\BOOKMARK [1][-]{section.12}{Drawing}{}% 21
-\BOOKMARK [2][-]{subsection.12.1}{Drawmap}{section.12}% 22
-\BOOKMARK [2][-]{subsection.12.2}{Drawing}{section.12}% 23
-\BOOKMARK [1][-]{section.13}{Map}{}% 24
-\BOOKMARK [1][-]{section.14}{Actor list}{}% 25
-\BOOKMARK [1][-]{section.15}{Game Loop function}{}% 26
-\BOOKMARK [1][-]{section.16}{Texthandling}{}% 27
-\BOOKMARK [1][-]{section.17}{Actor}{}% 28
-\BOOKMARK [1][-]{section.18}{Update Actors}{}% 29
-\BOOKMARK [1][-]{section.19}{Main}{}% 30
+\BOOKMARK [1][-]{section.3}{ActorActor}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{"Races"Races}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{ClassesClass}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{StatsStats}{section.3}% 6
+\BOOKMARK [3][-]{subsubsection.3.3.1}{List of stats to consider:}{subsection.3.3}% 7
+\BOOKMARK [3][-]{subsubsection.3.3.2}{In game stats}{subsection.3.3}% 8
+\BOOKMARK [2][-]{subsection.3.4}{Spells}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.5}{HR Guidelines}{section.3}% 10
+\BOOKMARK [1][-]{section.4}{Code}{}% 11
+\BOOKMARK [1][-]{section.5}{Globals}{}% 12
+\BOOKMARK [1][-]{section.6}{Positional handlingPosition}{}% 13
+\BOOKMARK [2][-]{subsection.6.1}{Cell functionCoordinate}{section.6}% 14
+\BOOKMARK [2][-]{subsection.6.2}{CollisionCollision}{section.6}% 15
+\BOOKMARK [2][-]{subsection.6.3}{MoveUpdate}{section.6}% 16
+\BOOKMARK [2][-]{subsection.6.4}{VectorDatacontainer::Coordinate}{section.6}% 17
+\BOOKMARK [1][-]{section.7}{InputIO}{}% 18
+\BOOKMARK [2][-]{subsection.7.1}{Input player movement}{section.7}% 19
+\BOOKMARK [2][-]{subsection.7.2}{Ressource handlerFile}{section.7}% 20
+\BOOKMARK [3][-]{subsubsection.7.2.1}{File classdatacontainer}{subsection.7.2}% 21
+\BOOKMARK [3][-]{subsubsection.7.2.2}{Tilesheet classdatacontainer}{subsection.7.2}% 22
+\BOOKMARK [1][-]{section.8}{Time}{}% 23
+\BOOKMARK [2][-]{subsection.8.1}{Turndatacontainer}{section.8}% 24
+\BOOKMARK [1][-]{section.9}{Window handler}{}% 25
+\BOOKMARK [1][-]{section.10}{View MIGHT BE REMOVED}{}% 26
+\BOOKMARK [1][-]{section.11}{DrawingOnscreen}{}% 27
+\BOOKMARK [2][-]{subsection.11.1}{DrawmapMap}{section.11}% 28
+\BOOKMARK [2][-]{subsection.11.2}{DrawingCharacters}{section.11}% 29
+\BOOKMARK [1][-]{section.12}{MapMap}{}% 30
+\BOOKMARK [1][-]{section.13}{Actor listActor}{}% 31
+\BOOKMARK [1][-]{section.14}{Game Loop function}{}% 32
+\BOOKMARK [1][-]{section.15}{TODO TextText}{}% 33
+\BOOKMARK [2][-]{subsection.15.1}{TODO TextprintingOnscreen}{section.15}% 34
+\BOOKMARK [2][-]{subsection.15.2}{TODO Textformatting}{section.15}% 35
+\BOOKMARK [2][-]{subsection.15.3}{TODO Textinput}{section.15}% 36
+\BOOKMARK [1][-]{section.16}{ActorActor}{}% 37
+\BOOKMARK [2][-]{subsection.16.1}{Actor classDatacontainer}{section.16}% 38
+\BOOKMARK [2][-]{subsection.16.2}{Update Actors}{section.16}% 39
+\BOOKMARK [1][-]{section.17}{Main}{}% 40

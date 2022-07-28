@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-07-22 Fri 11:14 -->
+<!-- 2022-07-28 Thu 13:43 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -199,40 +199,84 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org6174474">1. introduction</a></li>
-<li><a href="#org1cbe151">2. Basic idea</a></li>
-<li><a href="#org9ac148f">3. "Races"</a></li>
-<li><a href="#orgce6918d">4. Classes</a></li>
-<li><a href="#orgb32a673">5. Stats</a>
+<li><a href="#org1ead58c">1. introduction</a></li>
+<li><a href="#orga8b91b4">2. Basic idea</a></li>
+<li><a href="#orgdb5a2dc">3. Actor&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Actor">Actor</span></span></a>
 <ul>
-<li><a href="#orge188dbc">5.1. List of stats to consider:</a></li>
+<li><a href="#orgb211649">3.1. "Races"&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Races">Races</span></span></a></li>
+<li><a href="#org180025c">3.2. Classes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Class">Class</span></span></a></li>
+<li><a href="#org544d3cd">3.3. Stats&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Stats">Stats</span></span></a>
+<ul>
+<li><a href="#org89d9968">3.3.1. List of stats to consider:</a></li>
+<li><a href="#org92d2945">3.3.2. In game stats</a></li>
 </ul>
 </li>
-<li><a href="#orgf933f05">6. Code</a></li>
-<li><a href="#org88ecc75">7. Globals</a></li>
-<li><a href="#org702c42a">8. Cell function</a></li>
-<li><a href="#org0b1f34c">9. Ressource handler</a></li>
-<li><a href="#orge48ac69">10. Sprite class</a></li>
-<li><a href="#orge0058ce">11. Window handler</a></li>
-<li><a href="#orgc23753f">12. View MIGHT BE REMOVED</a></li>
-<li><a href="#org0d64002">13. Drawing</a></li>
-<li><a href="#org8169965">14. Map</a></li>
-<li><a href="#org6f44485">15. Game Loop function</a></li>
-<li><a href="#orgd11a0e6">16. Player</a></li>
-<li><a href="#orgd6fc30c">17. Input player movement</a></li>
-<li><a href="#org828bceb">18. Move</a></li>
-<li><a href="#org46e4185">19. Main</a></li>
+<li><a href="#org74e9961">3.4. Spells</a></li>
+<li><a href="#org2945e8c">3.5. HR Guidelines</a></li>
+</ul>
+</li>
+<li><a href="#org034b909">4. Code</a></li>
+<li><a href="#org2f6b68a">5. Globals</a></li>
+<li><a href="#org17a5482">6. Positional handling&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Position">Position</span></span></a>
+<ul>
+<li><a href="#orga152b18">6.1. Cell function&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Coordinate">Coordinate</span></span></a></li>
+<li><a href="#org309dfd4">6.2. Collision&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Collision">Collision</span></span></a></li>
+<li><a href="#orgfff8d3c">6.3. Move&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Update">Update</span></span></a></li>
+<li><a href="#org3df2669">6.4. Vector&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Datacontainer">Datacontainer</span>&#xa0;<span class=""></span>&#xa0;<span class="Coordinate">Coordinate</span></span></a></li>
+</ul>
+</li>
+<li><a href="#orgec80ced">7. Input&#xa0;&#xa0;&#xa0;<span class="tag"><span class="IO">IO</span></span></a>
+<ul>
+<li><a href="#org1c778cf">7.1. Input player movement</a></li>
+<li><a href="#org9dc2227">7.2. Ressource handler&#xa0;&#xa0;&#xa0;<span class="tag"><span class="File">File</span></span></a>
+<ul>
+<li><a href="#orge6e0418">7.2.1. File class&#xa0;&#xa0;&#xa0;<span class="tag"><span class="datacontainer">datacontainer</span></span></a></li>
+<li><a href="#org3082ed3">7.2.2. Tilesheet class&#xa0;&#xa0;&#xa0;<span class="tag"><span class="datacontainer">datacontainer</span></span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org1ca6959">8. Time</a>
+<ul>
+<li><a href="#orga36d030">8.1. Turn&#xa0;&#xa0;&#xa0;<span class="tag"><span class="datacontainer">datacontainer</span></span></a></li>
+</ul>
+</li>
+<li><a href="#org0ff5b6f">9. Window handler</a></li>
+<li><a href="#org78a5920">10. View MIGHT BE REMOVED</a></li>
+<li><a href="#orgbbef585">11. Drawing&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Onscreen">Onscreen</span></span></a>
+<ul>
+<li><a href="#org3810c81">11.1. Drawmap&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Map">Map</span></span></a></li>
+<li><a href="#org74b4b28">11.2. Drawing&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Characters">Characters</span></span></a></li>
+</ul>
+</li>
+<li><a href="#org08ac217">12. Map&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Map">Map</span></span></a></li>
+<li><a href="#org8cf3768">13. Actor list&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Actor">Actor</span></span></a></li>
+<li><a href="#orgaa8e914">14. Game Loop function</a></li>
+<li><a href="#org31a3f13">15. <span class="todo TODO">TODO</span> Text&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Text">Text</span></span></a>
+<ul>
+<li><a href="#orga289329">15.1. <span class="todo TODO">TODO</span> Textprinting&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Onscreen">Onscreen</span></span></a></li>
+<li><a href="#org7810ed5">15.2. <span class="todo TODO">TODO</span> Textformatting</a></li>
+<li><a href="#orgee4354d">15.3. <span class="todo TODO">TODO</span> Textinput</a></li>
+</ul>
+</li>
+<li><a href="#org9c35727">16. Actor&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Actor">Actor</span></span></a>
+<ul>
+<li><a href="#org292f3ce">16.1. Actor class&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Datacontainer">Datacontainer</span></span></a></li>
+<li><a href="#orgfe62f71">16.2. Update Actors</a></li>
+</ul>
+</li>
+<li><a href="#org2a4c3f7">17. Main</a></li>
 </ul>
 </div>
 </div>
 
 
-<div id="outline-container-org6174474" class="outline-2">
-<h2 id="org6174474"><span class="section-number-2">1.</span> introduction</h2>
+<div id="outline-container-org1ead58c" class="outline-2">
+<h2 id="org1ead58c"><span class="section-number-2">1.</span> introduction</h2>
 </div>
 
-<div id="outline-container-org1cbe151" class="outline-2">
-<h2 id="org1cbe151"><span class="section-number-2">2.</span> Basic idea</h2>
+<div id="outline-container-orga8b91b4" class="outline-2">
+<h2 id="orga8b91b4"><span class="section-number-2">2.</span> Basic idea</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 A dungeon crawler set in a modern day office space (with cubicles, cantinas etc.) instead of fighting I need another way of handling engagement.
@@ -240,9 +284,17 @@ A dungeon crawler set in a modern day office space (with cubicles, cantinas etc.
 </div>
 </div>
 
-<div id="outline-container-org9ac148f" class="outline-2">
-<h2 id="org9ac148f"><span class="section-number-2">3.</span> "Races"</h2>
+<div id="outline-container-orgdb5a2dc" class="outline-2">
+<h2 id="orgdb5a2dc"><span class="section-number-2">3.</span> Actor&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Actor">Actor</span></span></h2>
 <div class="outline-text-2" id="text-3">
+<p>
+An actor is anything that is supposed to have sentience and behaviour ingame.
+</p>
+</div>
+
+<div id="outline-container-orgb211649" class="outline-3">
+<h3 id="orgb211649"><span class="section-number-3">3.1.</span> "Races"&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Races">Races</span></span></h3>
+<div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>Zzzombie - the constantly sleepy coworker, never seems to be quite awake nor have they had a good nights sleep in their life.</li>
 <li>Gobbo - The coworker who handles mails, you're not sure if they've ever had a shower, but the greasy strands of hair makes you think not.</li>
@@ -255,32 +307,34 @@ A dungeon crawler set in a modern day office space (with cubicles, cantinas etc.
 </div>
 
 
-<div id="outline-container-orgce6918d" class="outline-2">
-<h2 id="orgce6918d"><span class="section-number-2">4.</span> Classes</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org180025c" class="outline-3">
+<h3 id="org180025c"><span class="section-number-3">3.2.</span> Classes&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Class">Class</span></span></h3>
+<div class="outline-text-3" id="text-3-2">
 <ul class="org-ul">
 <li>Financial</li>
-<li>IT</li>
+<li>IT Wizard</li>
 <li>Assistant</li>
 <li>Intern</li>
 <li>Secretary</li>
 <li>Janitor</li>
+<li>Manager</li>
+<li>HR</li>
 <li>Boss</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgb32a673" class="outline-2">
-<h2 id="orgb32a673"><span class="section-number-2">5.</span> Stats</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-org544d3cd" class="outline-3">
+<h3 id="org544d3cd"><span class="section-number-3">3.3.</span> Stats&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Stats">Stats</span></span></h3>
+<div class="outline-text-3" id="text-3-3">
 <p>
 Stats in an RPG is like&#x2026; something&#x2026; really&#x2026; hmm (ed: come back with a zinger here). Usually the stats in a traditional roguelike might be something akin to - Constitution, Strength, Wisdom, Intelligence etc. basically if you've seen a rulebook for a TTRPG you can probably recognize most of these AND THEY WORK! that's why people use them, they really REALLY work. I'm not choosing differently because I think I can do better, but because, well since the game is already set in a modern office environment, there's little reason to not have some weird quirk with the stats again.
 </p>
 </div>
 
-<div id="outline-container-orge188dbc" class="outline-3">
-<h3 id="orge188dbc"><span class="section-number-3">5.1.</span> List of stats to consider:</h3>
-<div class="outline-text-3" id="text-5-1">
+<div id="outline-container-org89d9968" class="outline-4">
+<h4 id="org89d9968"><span class="section-number-4">3.3.1.</span> List of stats to consider:</h4>
+<div class="outline-text-4" id="text-3-3-1">
 <ul class="org-ul">
 <li>Neuroticism: how panicked and alert a player is about their surrounding.</li>
 <li>Openness: how open they can allow themself to be.</li>
@@ -300,34 +354,88 @@ So that's the N.O.R.M.A.L. stat system (you'd think I'd have picked these words 
 </p>
 </div>
 </div>
+
+<div id="outline-container-org92d2945" class="outline-4">
+<h4 id="org92d2945"><span class="section-number-4">3.3.2.</span> In game stats</h4>
+<div class="outline-text-4" id="text-3-3-2">
+<p>
+Health
+</p>
+<ul class="org-ul">
+<li>Phys-Health
+<ul class="org-ul">
+<li>is made out of Laziness (the lower the laziness the higher the health), Openness</li>
+</ul></li>
+<li>Mental-Health
+<ul class="org-ul">
+<li>is made out of Madness, Reasoning.</li>
+</ul></li>
+<li>Social-Health
+<ul class="org-ul">
+<li>Agreeableness, Neuroticism</li>
+</ul></li>
+
+<li>HR-cana
+<ul class="org-ul">
+<li>Is defined by Madness, Agreeableness</li>
+</ul></li>
+<li></li>
+</ul>
+</div>
+</div>
 </div>
 
-<div id="outline-container-orgf933f05" class="outline-2">
-<h2 id="orgf933f05"><span class="section-number-2">6.</span> Code</h2>
-<div class="outline-text-2" id="text-6">
+
+<div id="outline-container-org74e9961" class="outline-3">
+<h3 id="org74e9961"><span class="section-number-3">3.4.</span> Spells</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+A magic system wouldn't really work in a contemporary world. There is however something more arcane and mysterious that I can employ which is: HR guidelines.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2945e8c" class="outline-3">
+<h3 id="org2945e8c"><span class="section-number-3">3.5.</span> HR Guidelines</h3>
+<div class="outline-text-3" id="text-3-5">
+<p>
+The HR guidelines should, like all magic systems. Affect stats in some way.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org034b909" class="outline-2">
+<h2 id="org034b909"><span class="section-number-2">4.</span> Code</h2>
+<div class="outline-text-2" id="text-4">
 <p>
 How neat would it be if we could quit here? alas now we have to try and code this :S 
+Ah well into the fray.
 </p>
 
 
 
-
 <div class="org-src-container">
-<pre class="src src-python" id="orgd65a93f"><span style="color: #00ffff;">from</span> __future__ <span style="color: #00ffff;">import</span> annotations
+<pre class="src src-python" id="org3736006"><span style="color: #00ffff;">from</span> __future__ <span style="color: #00ffff;">import</span> annotations
 <span style="color: #00ffff;">from</span> abc <span style="color: #00ffff;">import</span> ABC, abstractmethod
 <span style="color: #00ffff;">import</span> pygame
 <span style="color: #00ffff;">import</span> pprint
 <span style="color: #00ffff;">from</span> pygame.<span style="color: #b0c4de;">locals</span> <span style="color: #00ffff;">import</span> *
 <span style="color: #00ffff;">import</span> numpy
 <span style="color: #00ffff;">from</span> collections.abc <span style="color: #00ffff;">import</span> Callable
+<span style="color: #00ffff;">from</span> functools <span style="color: #00ffff;">import</span> <span style="color: #b0c4de;">reduce</span>, cache, wraps, partial
+<span style="color: #00ffff;">import</span> json
+<span style="color: #00ffff;">from</span> dataclasses <span style="color: #00ffff;">import</span> dataclass, field
+<span style="color: #00ffff;">import</span> operator
+<span style="color: #00ffff;">import</span> rx
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org88ecc75" class="outline-2">
-<h2 id="org88ecc75"><span class="section-number-2">7.</span> Globals</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-org2f6b68a" class="outline-2">
+<h2 id="org2f6b68a"><span class="section-number-2">5.</span> Globals</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 Global variables are frowned upon by virtually everyone and their mom, which is fair, I don't like them either, but I don't have a better idea.
 </p>
@@ -339,47 +447,177 @@ Global variables are the following
 <li>cell size, i.e. how large the cell that fills the screen surface should be. Then I can later just divide the screenwidth or screenheight of the drawing destination surface by the cell size to know how big the are is. (so I don't draw outside the screen/surface), this is also where I'm placing the filenames for fonts which I might need/want to change.</li>
 </ul>
 
-
 <div class="org-src-container">
-<pre class="src src-python" id="org5bf96c9"><span style="color: #7fffd4;">CELLSIZE</span> = 32
+<pre class="src src-python" id="org2e15c4b"><span style="color: #7fffd4;">CELLSIZE</span> = 32
 <span style="color: #7fffd4;">FONTFILE</span> = <span style="color: #ffc1c1;">"terminal8x8_gs_ro.png"</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org702c42a" class="outline-2">
-<h2 id="org702c42a"><span class="section-number-2">8.</span> Cell function</h2>
-<div class="outline-text-2" id="text-8">
+
+<div id="outline-container-org17a5482" class="outline-2">
+<h2 id="org17a5482"><span class="section-number-2">6.</span> Positional handling&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Position">Position</span></span></h2>
+<div class="outline-text-2" id="text-6">
 <p>
-The cell function handles converting the direction vectors into coordinates that can 
+Positional functions all tackles different aspect of onscreen positioning. Things lige moving, checking collisions. multiplying a vector tuple so that it uses the correct 
 </p>
 </div>
-</div>
 
+<div id="outline-container-orga152b18" class="outline-3">
+<h3 id="orga152b18"><span class="section-number-3">6.1.</span> Cell function&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Coordinate">Coordinate</span></span></h3>
+<div class="outline-text-3" id="text-6-1">
+<p>
+The cell function handles converting the direction vectors into coordinates that can be used on the screen
+</p>
 
-<div id="outline-container-org0b1f34c" class="outline-2">
-<h2 id="org0b1f34c"><span class="section-number-2">9.</span> Ressource handler</h2>
-<div class="outline-text-2" id="text-9">
 <div class="org-src-container">
-<pre class="src src-python" id="org771e71e"><span style="color: #00ffff;">class</span> <span style="color: #63b8ff;">FileLoader</span>():
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   _fontimage : pygame.Surface
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">__init__</span>(<span style="color: #00ffff;">self</span>, filename : <span style="color: #b0c4de;">str</span>):
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">self</span>._fontimage = pygame.image.load(<span style="color: #ffc1c1;">"terminal8x8_gs_ro.png"</span>)
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">self</span>._fontimage.set_colorkey((0,0,0))
-
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">GetTileSet</span>(<span style="color: #00ffff;">self</span>):
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">pass</span>
+<pre class="src src-python" id="org1c1ffdf"><span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">Cell</span>(cell : (<span style="color: #b0c4de;">int</span>, <span style="color: #b0c4de;">int</span>)) -&gt; (<span style="color: #b0c4de;">int</span>, <span style="color: #b0c4de;">int</span>):
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">return</span> <span style="color: #b0c4de;">tuple</span>(<span style="color: #b0c4de;">map</span>(<span style="color: #00ffff;">lambda</span> n : n * CELLSIZE, cell))
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orge48ac69" class="outline-2">
-<h2 id="orge48ac69"><span class="section-number-2">10.</span> Sprite class</h2>
-<div class="outline-text-2" id="text-10">
+
+<div id="outline-container-org309dfd4" class="outline-3">
+<h3 id="org309dfd4"><span class="section-number-3">6.2.</span> Collision&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Collision">Collision</span></span></h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+The collision function gets two position tuples and checks if they are the same, if they are it returns true if not it returns false
+</p>
+
 <div class="org-src-container">
-<pre class="src src-python" id="org4268007"><span style="color: #00ffff;">class</span> <span style="color: #63b8ff;">TileSheet</span>:
+<pre class="src src-python" id="org3725709"><span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">collision</span>(xy, _xy):
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">return</span> xy == _xy
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgfff8d3c" class="outline-3">
+<h3 id="orgfff8d3c"><span class="section-number-3">6.3.</span> Move&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Update">Update</span></span></h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+Move function is just meant to take tqwo positional arguments, the current position and the destination, and return a new tuple with the new current position. I believe It <b>could</b> theoretically maybe, potentially handle diagonal movement - ish but this is just you grandmas 4 directional moves.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org14e1f4c"><span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">move</span>(xy : (<span style="color: #b0c4de;">int</span>,<span style="color: #b0c4de;">int</span>), _xy : (<span style="color: #b0c4de;">int</span>, <span style="color: #b0c4de;">int</span>)) -&gt; (<span style="color: #b0c4de;">int</span>, <span style="color: #b0c4de;">int</span>):
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">acc</span> = []
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">for</span> n, _n <span style="color: #00ffff;">in</span> <span style="color: #b0c4de;">zip</span>(xy, _xy):
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">if</span> n &gt; _n:
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">n</span> = n - 2
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">elif</span> n &lt; _n:
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">n</span> = n + 2
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   acc.append(n)
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">return</span> <span style="color: #b0c4de;">tuple</span>(acc)
+
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org3df2669" class="outline-3">
+<h3 id="org3df2669"><span class="section-number-3">6.4.</span> Vector&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Datacontainer">Datacontainer</span>&#xa0;<span class=""></span>&#xa0;<span class="Coordinate">Coordinate</span></span></h3>
+<div class="outline-text-3" id="text-6-4">
+<p>
+The vector class is basically a copy of a tuple datatype, however it has the added "<span class="underline"><span class="underline">add</span></span>" and "<span class="underline"><span class="underline">sub</span></span>" methods defined. I don't really need (at the moment) to handle more "advanced" features like vector dot product and so on.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="orga1e22ff"><span style="color: #63b8ff;">@dataclass</span>(frozen=<span style="color: #8470ff; font-weight: bold;">True</span>)
+<span style="color: #00ffff;">class</span> <span style="color: #63b8ff;">Vector</span>:
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   x : <span style="color: #b0c4de;">int</span>
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   y : <span style="color: #b0c4de;">int</span>
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">__add__</span>(<span style="color: #00ffff;">self</span>, other):
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">return</span> Vector(<span style="color: #00ffff;">self</span>.x + other.x, <span style="color: #00ffff;">self</span>.y + other.y)
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">__sub__</span>(<span style="color: #00ffff;">self</span>, other):
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">return</span> Vector(<span style="color: #00ffff;">self</span>.x - other.x, <span style="color: #00ffff;">self</span>.y - other.y)
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgec80ced" class="outline-2">
+<h2 id="orgec80ced"><span class="section-number-2">7.</span> Input&#xa0;&#xa0;&#xa0;<span class="tag"><span class="IO">IO</span></span></h2>
+<div class="outline-text-2" id="text-7">
+</div>
+<div id="outline-container-org1c778cf" class="outline-3">
+<h3 id="org1c778cf"><span class="section-number-3">7.1.</span> Input player movement</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+for now I just handle the input through a simple function that checks whether or not a valid key has been pressed. if not it returns a (0,0) vector. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org5c92400"><span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">getInput</span>(ev):
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">inputList</span> = { pygame.K_UP : (0,-1),
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span> pygame.K_DOWN : (0,1),
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span> pygame.K_LEFT : (-1, 0),
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span> pygame.K_RIGHT : (1, 0),
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   }
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">return</span> inputList.get(ev.key, (0,0))
+</pre>
+</div>
+</div>
+</div>
+
+
+
+
+
+<div id="outline-container-org9dc2227" class="outline-3">
+<h3 id="org9dc2227"><span class="section-number-3">7.2.</span> Ressource handler&#xa0;&#xa0;&#xa0;<span class="tag"><span class="File">File</span></span></h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+Another euqually import (or more important input) is the different ressources. For now it is only a config json file and a tilesheet, I'm interested in, but it could expand to more tilesheets, or even premade levels (or templates). The ressources are being loaded into a file class that holds the different information.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org788f202"><span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">loadFiles</span>() -&gt; ConfigFile:
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">_fontImage</span> = pygame.image.load(<span style="color: #ffc1c1;">"terminal8x8_gs_ro.png"</span>)
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   _fontImage.set_colorkey((0,0,0))
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">with</span> <span style="color: #b0c4de;">open</span>(<span style="color: #ffc1c1;">'conf.json'</span>, <span style="color: #ffc1c1;">'r'</span>) <span style="color: #00ffff;">as</span> _file:
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">config</span> = json.load(_file)
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">return</span> ConfigFile(_fontImage, config)
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orge6e0418" class="outline-4">
+<h4 id="orge6e0418"><span class="section-number-4">7.2.1.</span> File class&#xa0;&#xa0;&#xa0;<span class="tag"><span class="datacontainer">datacontainer</span></span></h4>
+<div class="outline-text-4" id="text-7-2-1">
+<p>
+The file class is an immutable data container that holds the information needed for the game to function
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org65a0019"><span style="color: #63b8ff;">@dataclass</span>(frozen=<span style="color: #8470ff; font-weight: bold;">True</span>)
+<span style="color: #00ffff;">class</span> <span style="color: #63b8ff;">ConfigFile</span>:
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   _image : pygame.Surface
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   _conf : <span style="color: #b0c4de;">dict</span>
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">image</span>(<span style="color: #00ffff;">self</span>) -&gt; pygame.Surface:
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">return</span> <span style="color: #00ffff;">self</span>._image
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">config</span>(<span style="color: #00ffff;">self</span>) -&gt; <span style="color: #b0c4de;">dict</span>:
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">return</span> <span style="color: #00ffff;">self</span>._conf
+</pre>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org3082ed3" class="outline-4">
+<h4 id="org3082ed3"><span class="section-number-4">7.2.2.</span> Tilesheet class&#xa0;&#xa0;&#xa0;<span class="tag"><span class="datacontainer">datacontainer</span></span></h4>
+<div class="outline-text-4" id="text-7-2-2">
+<div class="org-src-container">
+<pre class="src src-python" id="org6704ad4"><span style="color: #63b8ff;">@dataclass</span>(frozen=<span style="color: #8470ff; font-weight: bold;">True</span>)
+<span style="color: #00ffff;">class</span> <span style="color: #63b8ff;">TileSheet</span>:
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">_tiles</span> = [pygame.Surface]
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">__init__</span>(<span style="color: #00ffff;">self</span>,
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span><span style="color: #b0c4de;">file</span> : pygame.Surface,
@@ -399,18 +637,60 @@ The cell function handles converting the direction vectors into coordinates that
 </div>
 </div>
 </div>
+</div>
+</div>
 
 
-<div id="outline-container-orge0058ce" class="outline-2">
-<h2 id="orge0058ce"><span class="section-number-2">11.</span> Window handler</h2>
-<div class="outline-text-2" id="text-11">
+<div id="outline-container-org1ca6959" class="outline-2">
+<h2 id="org1ca6959"><span class="section-number-2">8.</span> Time</h2>
+<div class="outline-text-2" id="text-8">
+<div class="org-center">
+<p>
+time where did you go?&#x2026;. aaaand that's all I had time for
+</p>
+</div>
+
+<p>
+In the game there's going to be two kinds of time. Firstly a realtime module that just makes sure we don't call the draw function more than 60 times a second (at most) because let's be honest&#x2026; it's a text based engine so it's kindda dumb to blow up the GPU for <b>that</b>
+</p>
+
+<p>
+But the second kind of time is the ingame time. That's based on turns. Every turn everything that can (and should) move, moves.
+</p>
+</div>
+
+<div id="outline-container-orga36d030" class="outline-3">
+<h3 id="orga36d030"><span class="section-number-3">8.1.</span> Turn&#xa0;&#xa0;&#xa0;<span class="tag"><span class="datacontainer">datacontainer</span></span></h3>
+<div class="outline-text-3" id="text-8-1">
+<p>
+The turn class is a data container class (get used to be seeing those around btw. ) that takes care of storing whatever information a turn need.
+</p>
+<div class="org-src-container">
+<pre class="src src-python" id="orga5ccba9"><span style="color: #63b8ff;">@dataclass</span>(frozen=Turn)
+<span style="color: #00ffff;">class</span> <span style="color: #63b8ff;">Turn</span>:
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   turn : <span style="color: #b0c4de;">int</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org175daf3">
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org0ff5b6f" class="outline-2">
+<h2 id="org0ff5b6f"><span class="section-number-2">9.</span> Window handler</h2>
+<div class="outline-text-2" id="text-9">
 <p>
 The window class is where the initializing is going to happen, as well as where the pygame window.
 </p>
 
 
 <div class="org-src-container">
-<pre class="src src-python" id="orga492d4a"><span style="color: #00ffff;">class</span> <span style="color: #63b8ff;">Window</span>():
+<pre class="src src-python" id="orgf2ae692"><span style="color: #00ffff;">class</span> <span style="color: #63b8ff;">Window</span>():
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">_size</span> = (<span style="color: #b0c4de;">int</span>, <span style="color: #b0c4de;">int</span>)
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">_surface</span> = pygame.Surface
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">__init__</span>(<span style="color: #00ffff;">self</span>, width, height) -&gt; <span style="color: #8470ff; font-weight: bold;">None</span>:
@@ -424,9 +704,10 @@ The window class is where the initializing is going to happen, as well as where 
 </div>
 </div>
 
-<div id="outline-container-orgc23753f" class="outline-2">
-<h2 id="orgc23753f"><span class="section-number-2">12.</span> View MIGHT BE REMOVED</h2>
-<div class="outline-text-2" id="text-12">
+
+<div id="outline-container-org78a5920" class="outline-2">
+<h2 id="org78a5920"><span class="section-number-2">10.</span> View MIGHT BE REMOVED</h2>
+<div class="outline-text-2" id="text-10">
 <p>
 The view holds a surface and a pygame.Rect. The rect is moved around to "slice" a subsurface from the map. 
 </p>
@@ -434,7 +715,7 @@ The view holds a surface and a pygame.Rect. The rect is moved around to "slice" 
 
 
 <div class="org-src-container">
-<pre class="src src-python" id="org46b1e93"><span style="color: #00ffff;">class</span> <span style="color: #63b8ff;">View</span>:
+<pre class="src src-python" id="org3f095e2"><span style="color: #00ffff;">class</span> <span style="color: #63b8ff;">View</span>:
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   _camera : pygame.Rect
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">_trackingObject</span> = <span style="color: #8470ff; font-weight: bold;">None</span>
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">__init__</span>(<span style="color: #00ffff;">self</span>,
@@ -456,35 +737,41 @@ The view holds a surface and a pygame.Rect. The rect is moved around to "slice" 
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">checkCenterObject</span>(<span style="color: #00ffff;">self</span>):
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">pass</span>
 
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">move</span>(<span style="color: #00ffff;">self</span>):
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">if</span> <span style="color: #00ffff;">self</span>._trackingObject <span style="color: #00ffff;">is</span> <span style="color: #00ffff;">not</span> <span style="color: #8470ff; font-weight: bold;">None</span>:
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">while</span>(<span style="color: #00ffff;">self</span>._camera.centerx &gt; <span style="color: #00ffff;">self</span>._trackingObject.x):
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">self</span>._camera.centerx -= 1
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">while</span>(<span style="color: #00ffff;">self</span>._camera.centerx &lt; <span style="color: #00ffff;">self</span>._trackingObject.x):
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">self</span>._camera.centerx += 1
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">while</span>(<span style="color: #00ffff;">self</span>._camera.centery &gt; <span style="color: #00ffff;">self</span>._trackingObject.y):
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">self</span>._camera.centery -= 1
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">while</span>(<span style="color: #00ffff;">self</span>._camera.centery &lt; <span style="color: #00ffff;">self</span>._trackingObject.y):
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">self</span>._camera.centery += 1
-
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">update</span>(<span style="color: #00ffff;">self</span>) -&gt; pygame.Surface:
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">pass</span>
+</pre>
+</div>
+
+<p>
+The view function takes the relevant actor and centers the map on it.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org9eea495"><span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">View</span>(actor : Actor,
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>surface : pygame.Surface,
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>view : pygame.Rect) -&gt; pygame.Surface:
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">_view</span> = view
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">_view.center</span> = actor.currxy()
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">return</span> surface.subsurface(_view)
 </pre>
 </div>
 </div>
 </div>
 
 
-
-<div id="outline-container-org0d64002" class="outline-2">
-<h2 id="org0d64002"><span class="section-number-2">13.</span> Drawing</h2>
-<div class="outline-text-2" id="text-13">
+<div id="outline-container-orgbbef585" class="outline-2">
+<h2 id="orgbbef585"><span class="section-number-2">11.</span> Drawing&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Onscreen">Onscreen</span></span></h2>
+<div class="outline-text-2" id="text-11">
+</div>
+<div id="outline-container-org3810c81" class="outline-3">
+<h3 id="org3810c81"><span class="section-number-3">11.1.</span> Drawmap&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Map">Map</span></span></h3>
+<div class="outline-text-3" id="text-11-1">
 <p>
 Drawmap function is only called to draw the surface of the static map.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org45aa6be"><span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">drawMap</span>(<span style="color: #b0c4de;">map</span> : <span style="color: #b0c4de;">str</span>,
+<pre class="src src-python" id="orgced8225"><span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">drawMap</span>(<span style="color: #b0c4de;">map</span> : <span style="color: #b0c4de;">str</span>,
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   pos : [(<span style="color: #b0c4de;">int</span>, <span style="color: #b0c4de;">int</span>)],
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   tiles : [pygame.Surface],
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   destination :pygame.Surface):
@@ -496,31 +783,40 @@ Drawmap function is only called to draw the surface of the static map.
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   destination.blits(_drawingList)
 </pre>
 </div>
+</div>
+</div>
 
+<div id="outline-container-org74b4b28" class="outline-3">
+<h3 id="org74b4b28"><span class="section-number-3">11.2.</span> Drawing&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Characters">Characters</span></span></h3>
+<div class="outline-text-3" id="text-11-2">
 <p>
-Drawing
+The drawing function takes one or more characters and draws them to the screen.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org44108d9"><span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">drawing</span>(chars : <span style="color: #b0c4de;">str</span>,
+<pre class="src src-python" id="orgdd5f111"><span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">drawing</span>(chars : <span style="color: #b0c4de;">str</span>,
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   pos : [(<span style="color: #b0c4de;">int</span>, <span style="color: #b0c4de;">int</span>)],
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   tiles : [pygame.Surface],
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   destination :pygame.Surface):
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   _drawingList : [(pygame.Surface,(<span style="color: #b0c4de;">int</span>,<span style="color: #b0c4de;">int</span>))] = []
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">x</span> = 0
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">y</span> = 0
+
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">for</span> ind, c <span style="color: #00ffff;">in</span> <span style="color: #b0c4de;">enumerate</span>(chars):
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   _drawingList.append((tiles[<span style="color: #b0c4de;">ord</span>(c)+1], pos[ind]))
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   destination.blits(_drawingList)
+
+
 </pre>
 </div>
 </div>
 </div>
+</div>
 
 
-<div id="outline-container-org8169965" class="outline-2">
-<h2 id="org8169965"><span class="section-number-2">14.</span> Map</h2>
-<div class="outline-text-2" id="text-14">
+<div id="outline-container-org08ac217" class="outline-2">
+<h2 id="org08ac217"><span class="section-number-2">12.</span> Map&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Map">Map</span></span></h2>
+<div class="outline-text-2" id="text-12">
 <p>
 the map is for now just a container class for a premade "dungeon", this is to test whether or not the drawing function can handle the sheer drawing calls. AND that it can handle the various characters.
 </p>
@@ -530,7 +826,7 @@ It's supposed to just have a giant, static (more or less static) image of the ma
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org9b98c84"><span style="color: #00ffff;">class</span> <span style="color: #63b8ff;">Map</span>:
+<pre class="src src-python" id="org711eb11"><span style="color: #00ffff;">class</span> <span style="color: #63b8ff;">Map</span>:
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   _str : <span style="color: #b0c4de;">str</span>
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   _pos : [(<span style="color: #b0c4de;">int</span>,<span style="color: #b0c4de;">int</span>)] = []
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   _map : pygame.Surface
@@ -572,130 +868,157 @@ It's supposed to just have a giant, static (more or less static) image of the ma
 </div>
 
 
+<div id="outline-container-org8cf3768" class="outline-2">
+<h2 id="org8cf3768"><span class="section-number-2">13.</span> Actor list&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Actor">Actor</span></span></h2>
+<div class="outline-text-2" id="text-13">
+<p>
+The actor list is where a list of actors are being created.
+</p>
 
-<div id="outline-container-org6f44485" class="outline-2">
-<h2 id="org6f44485"><span class="section-number-2">15.</span> Game Loop function</h2>
-<div class="outline-text-2" id="text-15">
+<div class="org-src-container">
+<pre class="src src-python" id="orgcba210d"><span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">makeActors</span>(amount : <span style="color: #b0c4de;">int</span>, playerIndex : <span style="color: #b0c4de;">int</span>) -&gt; [Player]:
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">pass</span>
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgaa8e914" class="outline-2">
+<h2 id="orgaa8e914"><span class="section-number-2">14.</span> Game Loop function</h2>
+<div class="outline-text-2" id="text-14">
 <p>
 The Game loop is where the structure of the game is at.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgc215665"><span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">GameLoop</span>(window, <span style="color: #b0c4de;">map</span>, player, tiles):
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">out</span> = <span style="color: #8470ff; font-weight: bold;">True</span>
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">enteties</span> = []
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">while</span>(out):
+<pre class="src src-python" id="orgcf3fe47"><span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">GameLoop</span>(window, _map, tiles):
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">running</span> = <span style="color: #8470ff; font-weight: bold;">True</span>
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">player</span> = Actor(<span style="color: #ffc1c1;">'@'</span>,(32,32), (32,32))
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">currVec</span> = player.currxy()
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">nxtVec</span> = player.nxtxy()
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">log</span> = []
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">cl</span> = pygame.time.Clock()
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">while</span>(running):
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">movVec</span> = (0,0)
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">for</span> event <span style="color: #00ffff;">in</span> pygame.event.get():
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">if</span> event.<span style="color: #b0c4de;">type</span> == pygame.QUIT:
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">out</span> = <span style="color: #8470ff; font-weight: bold;">False</span>
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">elif</span> event.<span style="color: #b0c4de;">type</span> == pygame.KEYDOWN:
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">movVec</span> = getInput(event)
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   match event.<span style="color: #b0c4de;">type</span>:
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   case pygame.QUIT:
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">running</span> = <span style="color: #8470ff; font-weight: bold;">False</span>
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   case pygame.KEYDOWN:
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">movVec</span> = getInput(event)
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">if</span> player.arrived():
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">player._next_x</span> += movVec[0] * CELLSIZE
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">player._next_y</span> += movVec[1] * CELLSIZE
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   move(player)
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   window.surface().blit(<span style="color: #b0c4de;">map</span>.<span style="color: #b0c4de;">map</span>(), (0,0))
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   drawing(player._c, [(player._x, player._y)], tiles._tiles, window.surface())
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">nxtVec</span> = <span style="color: #b0c4de;">tuple</span>(<span style="color: #b0c4de;">map</span>(<span style="color: #00ffff;">lambda</span> n, _n: n + ( _n * CELLSIZE), nxtVec, movVec))           
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">currVec</span> = move(player.currxy(), nxtVec)
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">player</span> = Actor( <span style="color: #ffc1c1;">'@'</span>,currVec, nxtVec)
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   window.surface().blit(_map.<span style="color: #b0c4de;">map</span>(), (0,0))
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   drawing(<span style="color: #b0c4de;">str</span>(player), [player.currxy()], tiles._tiles, window.surface())
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   pygame.display.flip()
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   pprint.pprint(<span style="color: #b0c4de;">str</span>(player._x) + <span style="color: #ffc1c1;">", "</span> + <span style="color: #b0c4de;">str</span>(player._y) + <span style="color: #ffc1c1;">", "</span> + <span style="color: #b0c4de;">str</span>(player._next_x) + <span style="color: #ffc1c1;">", "</span> + <span style="color: #b0c4de;">str</span>(player._next_y))
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #fa8072;">#</span><span style="color: #ff7f24; font-style: italic;">pprint.pprint(map._pos)</span>
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #fa8072;"># </span><span style="color: #ff7f24; font-style: italic;">Run game</span>
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   log.append(<span style="color: #ffc1c1;">"current vector : "</span> + <span style="color: #b0c4de;">str</span>(currVec) + <span style="color: #ffc1c1;">"nxtVector : "</span> + <span style="color: #b0c4de;">str</span>(nxtVec) + <span style="color: #ffc1c1;">"has player arrived: "</span> + <span style="color: #b0c4de;">str</span>(player.arrived()))
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   cl.tick_busy_loop(60)
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   pprint.pprint(_map.<span style="color: #b0c4de;">map</span>())
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgd11a0e6" class="outline-2">
-<h2 id="orgd11a0e6"><span class="section-number-2">16.</span> Player</h2>
+
+<div id="outline-container-org31a3f13" class="outline-2">
+<h2 id="org31a3f13"><span class="section-number-2">15.</span> <span class="todo TODO">TODO</span> Text&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Text">Text</span></span></h2>
+<div class="outline-text-2" id="text-15">
+</div>
+<div id="outline-container-orga289329" class="outline-3">
+<h3 id="orga289329"><span class="section-number-3">15.1.</span> <span class="todo TODO">TODO</span> Textprinting&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Onscreen">Onscreen</span></span></h3>
+</div>
+
+<div id="outline-container-org7810ed5" class="outline-3">
+<h3 id="org7810ed5"><span class="section-number-3">15.2.</span> <span class="todo TODO">TODO</span> Textformatting</h3>
+</div>
+
+<div id="outline-container-orgee4354d" class="outline-3">
+<h3 id="orgee4354d"><span class="section-number-3">15.3.</span> <span class="todo TODO">TODO</span> Textinput</h3>
+</div>
+</div>
+
+
+
+<div id="outline-container-org9c35727" class="outline-2">
+<h2 id="org9c35727"><span class="section-number-2">16.</span> Actor&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Actor">Actor</span></span></h2>
 <div class="outline-text-2" id="text-16">
 <p>
-The player class is, for now just a place holder, keeping the player char (literally a char value), position and that's it.
+The player class is, for now just a place holder, keeping the player char (literally a char value), position and that's it. It does also use a couple of standard operators that I've overloaded to return just a string.
 </p>
+</div>
 
+
+<div id="outline-container-org292f3ce" class="outline-3">
+<h3 id="org292f3ce"><span class="section-number-3">16.1.</span> Actor class&#xa0;&#xa0;&#xa0;<span class="tag"><span class="Datacontainer">Datacontainer</span></span></h3>
+<div class="outline-text-3" id="text-16-1">
 <div class="org-src-container">
-<pre class="src src-python" id="orga3813a0"><span style="color: #00ffff;">class</span> <span style="color: #63b8ff;">Player</span>:
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   _next_x : <span style="color: #b0c4de;">int</span>
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   _x : <span style="color: #b0c4de;">int</span>
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   _next_y : <span style="color: #b0c4de;">int</span>
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   _y : <span style="color: #b0c4de;">int</span>
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   _c : <span style="color: #b0c4de;">chr</span>
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">__init__</span>(<span style="color: #00ffff;">self</span>, x : <span style="color: #b0c4de;">int</span>, y : <span style="color: #b0c4de;">int</span>, char : <span style="color: #b0c4de;">chr</span>):
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">self</span>._x = x
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">self</span>._y = y
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">self</span>._next_x = x
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">self</span>._next_y = y
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">self</span>._c = char
+<pre class="src src-python" id="orgcf65b30"><span style="color: #63b8ff;">@dataclass</span>(frozen=<span style="color: #8470ff; font-weight: bold;">True</span>)
+<span style="color: #00ffff;">class</span> <span style="color: #63b8ff;">Actor</span>:
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   _c : <span style="color: #b0c4de;">chr</span> = field(init=<span style="color: #8470ff; font-weight: bold;">True</span>)
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   xy : (<span style="color: #b0c4de;">int</span>, <span style="color: #b0c4de;">int</span>) = field(init=<span style="color: #8470ff; font-weight: bold;">True</span>)
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   _xy : (<span style="color: #b0c4de;">int</span>, <span style="color: #b0c4de;">int</span>) = field(init=<span style="color: #8470ff; font-weight: bold;">True</span>)
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">arrived</span>(<span style="color: #00ffff;">self</span>) -&gt; <span style="color: #b0c4de;">bool</span>:
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">if</span> <span style="color: #00ffff;">self</span>._x == <span style="color: #00ffff;">self</span>._next_x <span style="color: #00ffff;">or</span> <span style="color: #00ffff;">self</span>._y == <span style="color: #00ffff;">self</span>._next_y:
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">return</span> <span style="color: #8470ff; font-weight: bold;">True</span>
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">return</span> <span style="color: #8470ff; font-weight: bold;">False</span>
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">return</span> <span style="color: #00ffff;">self</span>.xy == <span style="color: #00ffff;">self</span>._xy
+
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">currxy</span>(<span style="color: #00ffff;">self</span>):
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">return</span> <span style="color: #00ffff;">self</span>.xy
+
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">nxtxy</span>(<span style="color: #00ffff;">self</span>):
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">return</span> <span style="color: #00ffff;">self</span>._xy
+
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">__repr__</span>(<span style="color: #00ffff;">self</span>):
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">return</span> <span style="color: #00ffff;">self</span>._c
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgd6fc30c" class="outline-2">
-<h2 id="orgd6fc30c"><span class="section-number-2">17.</span> Input player movement</h2>
+
+<div id="outline-container-orgfe62f71" class="outline-3">
+<h3 id="orgfe62f71"><span class="section-number-3">16.2.</span> Update Actors</h3>
+<div class="outline-text-3" id="text-16-2">
+<p>
+The update actor function is going to map onto the list of actors in the game.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python" id="org74e38ec"><span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">updateActor</span>(lstOfActors : [Actor]) -&gt; [Actor]:
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #fa8072;"># </span><span style="color: #ff7f24; font-style: italic;">retLst = []</span>
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #fa8072;"># </span><span style="color: #ff7f24; font-style: italic;">#check collision</span>
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #fa8072;"># </span><span style="color: #ff7f24; font-style: italic;">lstCollision</span>
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #fa8072;"># </span><span style="color: #ff7f24; font-style: italic;">for nxt in lstOfActors:</span>
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #fa8072;">#     </span><span style="color: #ff7f24; font-style: italic;">lstCollision.append(nxt.</span>
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #fa8072;"># </span><span style="color: #ff7f24; font-style: italic;">for actor in lstOfActors:</span>
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #fa8072;">#     </span><span style="color: #ff7f24; font-style: italic;">currVec = move(actor.currxy(), actor.nxtxy())</span>
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">pass</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-org2a4c3f7" class="outline-2">
+<h2 id="org2a4c3f7"><span class="section-number-2">17.</span> Main</h2>
 <div class="outline-text-2" id="text-17">
-<p>
-for now I just handle the input through a simple function that checks whether or not a valid key has been pressed.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-python" id="org248457d"><span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">getInput</span>(ev):
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">inputList</span> = { pygame.K_UP : (0,-1),
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span> pygame.K_DOWN : (0,1),
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span> pygame.K_LEFT : (-1, 0),
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span> pygame.K_RIGHT : (1, 0),
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   }
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">return</span> inputList.get(ev.key, (0,0))
-</pre>
-</div>
-</div>
-</div>
-
-
-<div id="outline-container-org828bceb" class="outline-2">
-<h2 id="org828bceb"><span class="section-number-2">18.</span> Move</h2>
-<div class="outline-text-2" id="text-18">
-<p>
-Move function is just meant to update a players position to the new position.
-</p>
-
-<div class="org-src-container">
-<pre class="src src-python" id="org9217686"><span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">move</span>(player):
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">if</span> player._next_x &gt; player._x:
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">player._x</span> += 1
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">elif</span> player._next_x &lt; player._x:
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">player._x</span> -= 1
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">elif</span> player._next_y &gt; player._y:
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">player._y</span> += 1
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #00ffff;">elif</span> player._next_y &lt; player._y:
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">player._y</span> -= 1
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-org46e4185" class="outline-2">
-<h2 id="org46e4185"><span class="section-number-2">19.</span> Main</h2>
-<div class="outline-text-2" id="text-19">
 <p>
 In the main function I initialize the different components, like the window, the gameloop function, etc.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgbd65ee6"><span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">main</span>():
+<pre class="src src-python" id="orgd4c843d"><span style="color: #00ffff;">def</span> <span style="color: #00fa9a; font-size: 110%; font-weight: bold;">main</span>():
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   pygame.init()
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   pygame.font.init()
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #fa8072;"># </span><span style="color: #ff7f24; font-style: italic;">-------</span>
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">_files</span> = FileLoader(<span style="color: #ffc1c1;">"terminal8x8_gs_ro.png"</span>)
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">_tiles</span> = TileSheet(_files._fontimage, 8, 8, 16, 16)
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">_files</span> = loadFiles()
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">_tiles</span> = TileSheet(_files.image(), 8, 8, 16, 16)
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">window</span> = Window(800, 600)
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #b0c4de;">map</span> = Map(_tiles._tiles)
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #7fffd4;">player</span> = Player(32, 32, <span style="color: #ffc1c1;">"@"</span>)
-<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   GameLoop(window, <span style="color: #b0c4de;">map</span>, player, _tiles)
+<span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   GameLoop(window, <span style="color: #b0c4de;">map</span>, _tiles)
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   <span style="color: #fa8072;"># </span><span style="color: #ff7f24; font-style: italic;">-------</span>
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   pygame.<span style="color: #8470ff; font-weight: bold;">quit</span>()
 </pre>
@@ -704,7 +1027,7 @@ In the main function I initialize the different components, like the window, the
 
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgd06c878"><span style="color: #00ffff;">if</span> <span style="color: #b0c4de;">__name__</span>==<span style="color: #ffc1c1;">"__main__"</span>:
+<pre class="src src-python" id="org8b84021"><span style="color: #00ffff;">if</span> <span style="color: #b0c4de;">__name__</span>==<span style="color: #ffc1c1;">"__main__"</span>:
 <span style="color: #f5deb3; background-color: #4d4d4d;"> </span>   main()
 </pre>
 </div>
@@ -712,7 +1035,7 @@ In the main function I initialize the different components, like the window, the
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2022-07-22 Fri 11:14</p>
+<p class="date">Created: 2022-07-28 Thu 13:43</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

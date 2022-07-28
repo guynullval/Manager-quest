@@ -10,33 +10,44 @@
 
 A dungeon crawler set in a modern day office space (with cubicles, cantinas etc.) instead of fighting I need another way of handling engagement.
 
-* "Races"
+* Actor                                                               :Actor: 
 
-- Zzzombie - the constantly sleepy coworker, never seems to be quite awake nor have they had a good nights sleep in their life.
-- Gobbo - The coworker who handles mails, you're not sure if they've ever had a shower, but the greasy strands of hair makes you think not.
-- Creeps - 
+An actor is anything that is supposed to have sentience and behaviour ingame.
+
+** "Races"                                                            :Races:
+
+- Zzzombie
+  - the constantly sleepy coworker, never seems to be quite awake nor have they had a good nights sleep in their life.
+- Gobbo
+  - The coworker who handles mails, you're not sure if they've ever had a shower, but the greasy strands of hair makes you think not.
+- Creeps
+  - The coworker who is most stealthy. But of course also the most disliked by everyone.
 - Emotional vampire
 - Ghost
 - Troglodytes
+  - A primitive being, from a simpler time. Much, much simpler time.
 
 
-* Classes
+** Classes                                                            :Class:
 
-- Financial  
+- Financial
+
 - IT Wizard
+  - Can log into any computer and electronic system (HINT: it's cause everyones password is "Password1")
 - Assistant
 - Intern
 - Secretary
 - Janitor
 - Manager
 - HR
+  - is practically a wizard in their own right, they've spent years on HR seminars learning the archaic guidelines and are able to recite them. However no one else knows entirely IF they are made up or not.
 - Boss
 
-* Stats
+** Stats                                                              :Stats:
 
 Stats in an RPG is like... something... really... hmm (ed: come back with a zinger here). Usually the stats in a traditional roguelike might be something akin to - Constitution, Strength, Wisdom, Intelligence etc. basically if you've seen a rulebook for a TTRPG you can probably recognize most of these AND THEY WORK! that's why people use them, they really REALLY work. I'm not choosing differently because I think I can do better, but because, well since the game is already set in a modern office environment, there's little reason to not have some weird quirk with the stats again.
 
-** List of stats to consider:
+*** List of stats to consider:
 - Neuroticism: how panicked and alert a player is about their surrounding.
 - Openness: how open they can allow themself to be.
 - Reasoning: how good they are at logically deducting things, (maybe reasoning and neuroticism can kindda benefit and be a detriment at the same time)
@@ -49,7 +60,7 @@ I Really REALLY wanted to put "Agility" into this stat list, but not agility as 
 
 So that's the N.O.R.M.A.L. stat system (you'd think I'd have picked these words carefully... and you'd be right) patent pending yadda yadda.
 
-** In game stats
+*** In game stats
 
 Health
 - Phys-Health
@@ -61,14 +72,13 @@ Health
 
 - HR-cana
   - Is defined by Madness, Agreeableness
--
 
 
 ** Spells
 
 A magic system wouldn't really work in a contemporary world. There is however something more arcane and mysterious that I can employ which is: HR guidelines.
 
-*** HR Guidelines
+** HR Guidelines
 
 The HR guidelines should, like all magic systems. Affect stats in some way.
 
@@ -91,8 +101,8 @@ from collections.abc import Callable
 from functools import reduce, cache, wraps, partial
 import json
 from dataclasses import dataclass, field
-import operator
-import rx
+from datetime import datetime
+from rx.scheduler.mainloop import PyGameScheduler
 #+end_src
 
 * Globals
@@ -124,7 +134,7 @@ def Cell(cell : (int, int)) -> (int, int):
 #+end_src
 
 
-** Collision                                           :Coordinate:Collision:
+** Collision                                                      :Collision:
 
 The collision function gets two position tuples and checks if they are the same, if they are it returns true if not it returns false
 
@@ -135,7 +145,7 @@ def collision(xy, _xy):
 #+end_src
 
 
-** Move                                                   :Coordinate:Update:
+** Move                                                              :Update:
 
 Move function is just meant to take tqwo positional arguments, the current position and the destination, and return a new tuple with the new current position. I believe It *could* theoretically maybe, potentially handle diagonal movement - ish but this is just you grandmas 4 directional moves.
 
@@ -154,7 +164,9 @@ def move(xy : (int,int), _xy : (int, int)) -> (int, int):
 #+end_src
 
 
-** Vector                                          :Coordinate:datacontainer: 
+** Vector                                         :Datacontainer::Coordinate:
+
+The vector class is basically a copy of a tuple datatype, however it has the added "__add__" and "__sub__" methods defined. I don't really need (at the moment) to handle more "advanced" features like vector dot product and so on.
 
 #+Name: Vector
 #+begin_src python :nowrap yes :tangle "sourcecode.py"
@@ -204,7 +216,7 @@ def loadFiles() -> ConfigFile:
     return ConfigFile(_fontImage, config)
 #+end_src
 
-*** File class                                                :datacontainer:IO:File:
+*** File class                                                :datacontainer:
 
 The file class is an immutable data container that holds the information needed for the game to function
 
@@ -476,9 +488,9 @@ def GameLoop(window, _map, tiles):
 
 ** TODO Textprinting                                               :Onscreen:
 
-** TODO Textformatting
+** TODO Textformatting                                           :Formatting:
 
-** TODO Textinput
+** TODO Textinput                                                        :IO:
 
 
 
@@ -527,8 +539,20 @@ def updateActor(lstOfActors : [Actor]) -> [Actor]:
 #+end_src
 
 
+* TODO Sound                                                             :IO:
 
-* Main
+Sounds 
+
+** Music                                                              :Music:
+
+Currently I'm not sure whether or not to include music in this project... 
+It would be kindda cool to include lilypad
+
+#+begin_src lilypond
+
+#+end_src
+
+* Main                                                                 :Main:
 
 In the main function I initialize the different components, like the window, the gameloop function, etc.
 
